@@ -65,10 +65,8 @@ namespace JSON_Intellisense
                 string result = SearchVersion(package);
                 _version = ParseVersion(result);
 
-                if (_version == null)
-                    return;
-
-                Helper.ExecuteCommand(_dte, "Edit.ListMembers");
+                if (_version != null)
+                    Helper.ExecuteCommand(_dte, "Edit.ListMembers");
             });
         }
 

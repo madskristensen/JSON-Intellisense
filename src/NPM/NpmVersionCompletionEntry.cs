@@ -1,15 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using EnvDTE80;
 using Microsoft.JSON.Editor.Completion;
 using Microsoft.VisualStudio.Language.Intellisense;
-using Microsoft.Web.Editor;
-using Microsoft.Web.Editor.Intellisense;
-using Newtonsoft.Json.Linq;
 
 namespace JSON_Intellisense
 {
@@ -23,14 +17,6 @@ namespace JSON_Intellisense
         {
             _dte = dte;
         }
-
-        public NpmVersionCompletionEntry(string text, string description, StandardGlyphGroup glyph, IIntellisenseSession session)
-            : base(text, "\"" + text + "\"", description, GlyphService.GetGlyph(glyph, StandardGlyphItem.GlyphItemPublic), null, false, session as ICompletionSession)
-        { }
-
-        public NpmVersionCompletionEntry(string displayText, string insertionText, string description, IIntellisenseSession session)
-            : base(displayText, insertionText, description, _glyph, null, false, session as ICompletionSession)
-        { }
 
         public override void Commit()
         {

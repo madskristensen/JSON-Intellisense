@@ -5,6 +5,11 @@ VisualStudioVersion = 12.0.30716.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JSON Intellisense", "src\JSON Intellisense.csproj", "{F84E6465-6D2A-4732-9707-5EFBAB8E82C9}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{F81A2A0A-E487-4DEF-A9AC-2CFA173DA9E0}"
+	ProjectSection(SolutionItems) = preProject
+		README.md = README.md
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU

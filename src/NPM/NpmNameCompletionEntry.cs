@@ -11,8 +11,6 @@ using EnvDTE80;
 using Microsoft.JSON.Core.Parser;
 using Microsoft.JSON.Editor.Completion;
 using Microsoft.VisualStudio.Language.Intellisense;
-using Microsoft.Web.Editor;
-using Microsoft.Web.Editor.Intellisense;
 using Newtonsoft.Json.Linq;
 
 namespace JSON_Intellisense
@@ -22,34 +20,14 @@ namespace JSON_Intellisense
         private static ImageSource _glyph = BitmapFrame.Create(new Uri("pack://application:,,,/JSON Intellisense;component/Resources/npm.png", UriKind.RelativeOrAbsolute));//GlyphService.GetGlyph(StandardGlyphGroup.GlyphLibrary, StandardGlyphItem.GlyphItemPublic);
         private DTE2 _dte;
         private JSONDocument _doc;
+        internal static IEnumerable<string> _searchResults;
 
         public NpmNameCompletionEntry(string text, IIntellisenseSession session, DTE2 dte, JSONDocument doc)
-            : this(text, null, session)
+            : base(text, "\"" + text + "\"", null, _glyph, null, false, session as ICompletionSession)
         {
             _dte = dte;
             _doc = doc;
-
-            base.SortingPriority = 2;
-            base.FilterType = CompletionEntryFilterTypes.AlwaysVisible;
         }
-
-        public NpmNameCompletionEntry(string text, StandardGlyphGroup glyph, IIntellisenseSession session)
-            : this(text, null, glyph, session)
-        { }
-
-        public NpmNameCompletionEntry(string text, string description, IIntellisenseSession session)
-            : base(text, "\"" + text + "\"", description, _glyph, null, false, session as ICompletionSession)
-        { }
-
-        public NpmNameCompletionEntry(string text, string description, StandardGlyphGroup glyph, IIntellisenseSession session)
-            : base(text, "\"" + text + "\"", description, GlyphService.GetGlyph(glyph, StandardGlyphItem.GlyphItemPublic), null, false, session as ICompletionSession)
-        { }
-
-        public NpmNameCompletionEntry(string displayText, string insertionText, string description, IIntellisenseSession session)
-            : base(displayText, insertionText, description, _glyph, null, false, session as ICompletionSession)
-        { }
-
-        internal static IEnumerable<string> _searchResults;
 
         public override void Commit()
         {
@@ -64,23 +42,29 @@ namespace JSON_Intellisense
                 if (string.IsNullOrEmpty(searchTerm))
                     return;
 
-                ThreadPool.QueueUserWorkItem(o =>
-                {
-                    string result = SearchNPM(searchTerm);
-                    var children = GetChildren(result);
-
-                    if (children.Count() == 0)
-                    {
-                        base.Session.Dismiss();
-                        return;
-                    }
-
-                    _dte.StatusBar.Text = string.Empty;
-                    _searchResults = children.Select(c => (string)c["value"]);
-
-                    Helper.ExecuteCommand(_dte, "Edit.ListMembers");
-                });
+                ExecuteSearch(searchTerm);
             }
+        }
+
+        private void ExecuteSearch(string searchTerm)
+        {
+            ThreadPool.QueueUserWorkItem(o =>
+            {
+                string result = SearchNPM(searchTerm);
+                var children = GetChildren(result);
+
+                if (children.Count() == 0)
+                {
+                    _dte.StatusBar.Text = "No packages found matching '" + searchTerm + "'";
+                    base.Session.Dismiss();
+                    return;
+                }
+
+                _dte.StatusBar.Text = string.Empty;
+                _searchResults = children.Select(c => (string)c["value"]);
+
+                Helper.ExecuteCommand(_dte, "Edit.ListMembers");
+            });
         }
 
         private static JEnumerable<JToken> GetChildren(string result)
