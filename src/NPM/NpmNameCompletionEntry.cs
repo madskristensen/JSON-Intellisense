@@ -1,12 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Net;
 using System.Threading;
 using System.Web;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using EnvDTE;
 using EnvDTE80;
 using Microsoft.JSON.Core.Parser;
 using Microsoft.JSON.Editor.Completion;
@@ -50,7 +48,8 @@ namespace JSON_Intellisense
         {
             ThreadPool.QueueUserWorkItem(o =>
             {
-                string result = SearchNPM(searchTerm);
+                string url = "https://typeahead.npmjs.com/search?q=" + HttpUtility.UrlEncode(searchTerm);
+                string result = Helper.DownloadText(_dte, url);
                 var children = GetChildren(result);
 
                 if (children.Count() == 0)
@@ -91,31 +90,6 @@ namespace JSON_Intellisense
             {
                 return null;
             }
-        }
-
-        private string SearchNPM(string searchTerm)
-        {
-            _dte.StatusBar.Text = "Searching NPM for " + searchTerm + "...";
-            _dte.StatusBar.Animate(true, vsStatusAnimation.vsStatusAnimationSync);
-
-            try
-            {
-                Uri url = new Uri("https://typeahead.npmjs.com/search?q=" + HttpUtility.UrlEncode(searchTerm));
-                using (WebClient client = new WebClient())
-                {
-                    return client.DownloadString(url);
-                }
-            }
-            catch (Exception ex)
-            {
-                _dte.StatusBar.Text = "No packages could be found (" + ex.Message + ")";
-            }
-            finally
-            {
-                _dte.StatusBar.Animate(false, vsStatusAnimation.vsStatusAnimationSync);
-            }
-
-            return null;
         }
     }
 }

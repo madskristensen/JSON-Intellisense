@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.Composition;
-using System.Net;
 using System.Threading;
 using EnvDTE;
 using EnvDTE80;
@@ -62,7 +61,8 @@ namespace JSON_Intellisense
             ThreadPool.QueueUserWorkItem(o =>
             {
                 string package = dependency.Name.Text.Trim('"');
-                string result = SearchVersion(package);
+                string url = "http://registry.npmjs.org/" + package + "/latest";
+                string result = Helper.DownloadText(_dte, url);
                 _version = ParseVersion(result);
 
                 if (_version != null)
@@ -79,30 +79,6 @@ namespace JSON_Intellisense
             }
             catch
             { }
-
-            return null;
-        }
-
-        private string SearchVersion(string package)
-        {
-            _dte.StatusBar.Text = "Getting the version for " + package + "...";
-            _dte.StatusBar.Animate(true, vsStatusAnimation.vsStatusAnimationSync);
-            try
-            {
-                Uri url = new Uri("http://registry.npmjs.org/" + package + "/latest");
-                using (WebClient client = new WebClient())
-                {
-                    return client.DownloadString(url);
-                }
-            }
-            catch (Exception ex)
-            {
-                _dte.StatusBar.Text = ex.Message;
-            }
-            finally
-            {
-                _dte.StatusBar.Animate(false, vsStatusAnimation.vsStatusAnimationSync);
-            }
 
             return null;
         }
