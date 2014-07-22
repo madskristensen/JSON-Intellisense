@@ -1,19 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Web;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Media;
 using EnvDTE80;
-using Microsoft.CSS.Core;
 using Microsoft.JSON.Core.Parser;
 using Microsoft.JSON.Editor;
 using Microsoft.VisualStudio.Language.Intellisense;
 using Microsoft.VisualStudio.Text;
 using Newtonsoft.Json.Linq;
 
-namespace JSON_Intellisense
+namespace JSON_Intellisense.NPM
 {
     internal class NpmQuickInfo : IQuickInfoSource
     {
@@ -63,7 +58,7 @@ namespace JSON_Intellisense
 
         private NpmPackage GetText(string packageName)
         {
-            string url = "http://registry.npmjs.org/" + HttpUtility.UrlEncode(packageName) + "/latest";
+            string url = string.Format(Constants.PackageUrl, HttpUtility.UrlEncode(packageName));
             string result = Helper.DownloadText(_dte, url);
 
             if (string.IsNullOrEmpty(result))
@@ -89,26 +84,6 @@ namespace JSON_Intellisense
             }
 
             return null;
-        }
-
-
-        private static UIElement CreateFontPreview(BowerPackage package)
-        {
-            System.Windows.Controls.Grid host = new Grid();
-
-            // Name
-            host.Children.Add(new TextBlock() { Text = "Name", FontWeight = FontWeights.Bold});
-            host.Children.Add(new TextBlock() { Text = package.Name + Environment.NewLine, Padding = new Thickness(100, 0, 0, 0) });
-
-            // Url
-            host.Children.Add(new TextBlock() { Text = "Url", FontWeight = FontWeights.Bold });
-            host.Children.Add(new TextBlock() { Text = package.Url, Margin = new Thickness(100, 0, 0, 0) });
-
-            // Downloads
-            host.Children.Add(new TextBlock() { Text = "Downloads", FontWeight = FontWeights.Bold });
-            host.Children.Add(new TextBlock() { Text = package.Hits.ToString(), Margin = new Thickness(100, 0, 0, 0) });
-
-            return host;
         }
 
         private bool m_isDisposed;

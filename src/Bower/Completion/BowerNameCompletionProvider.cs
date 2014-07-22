@@ -10,7 +10,7 @@ using Microsoft.VisualStudio.Shell;
 using Microsoft.VisualStudio.Utilities;
 using Microsoft.Web.Editor.Intellisense;
 
-namespace JSON_Intellisense
+namespace JSON_Intellisense.Bower
 {
     [Export(typeof(IJSONCompletionListProvider))]
     [Name("BowerNameCompletionProvider")]
@@ -30,7 +30,7 @@ namespace JSON_Intellisense
             if (_dte == null)
                 _dte = serviceProvider.GetService(typeof(DTE)) as DTE2;
 
-            if (!Helper.IsSupportedFile(_dte, "bower.json"))
+            if (!Helper.IsSupportedFile(_dte, Constants.FileName))
                 yield break;
 
             if (BowerNameCompletionEntry._searchResults != null)

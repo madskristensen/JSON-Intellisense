@@ -3,25 +3,22 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using System.Web;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
 using EnvDTE80;
 using Microsoft.JSON.Core.Parser;
 using Microsoft.JSON.Editor.Completion;
 using Microsoft.VisualStudio.Language.Intellisense;
 using Newtonsoft.Json.Linq;
 
-namespace JSON_Intellisense
+namespace JSON_Intellisense.NPM
 {
     class NpmNameCompletionEntry : JSONCompletionEntry
     {
-        private static ImageSource _glyph = BitmapFrame.Create(new Uri("pack://application:,,,/JSON Intellisense;component/Resources/npm.png", UriKind.RelativeOrAbsolute));//GlyphService.GetGlyph(StandardGlyphGroup.GlyphLibrary, StandardGlyphItem.GlyphItemPublic);
         private DTE2 _dte;
         private JSONDocument _doc;
         internal static IEnumerable<string> _searchResults;
 
         public NpmNameCompletionEntry(string text, IIntellisenseSession session, DTE2 dte, JSONDocument doc)
-            : base(text, "\"" + text + "\"", null, _glyph, null, false, session as ICompletionSession)
+            : base(text, "\"" + text + "\"", null, Constants.Icon, null, false, session as ICompletionSession)
         {
             _dte = dte;
             _doc = doc;
@@ -48,7 +45,7 @@ namespace JSON_Intellisense
         {
             ThreadPool.QueueUserWorkItem(o =>
             {
-                string url = "https://typeahead.npmjs.com/search?q=" + HttpUtility.UrlEncode(searchTerm);
+                string url = string.Format(Constants.SearchUrl, HttpUtility.UrlEncode(searchTerm));
                 string result = Helper.DownloadText(_dte, url);
                 var children = GetChildren(result);
 

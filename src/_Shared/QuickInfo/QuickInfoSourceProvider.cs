@@ -24,9 +24,9 @@ namespace JSON_Intellisense
                 _dte = serviceProvider.GetService(typeof(DTE)) as DTE2;
 
             if (Helper.IsSupportedFile(_dte, "bower.json"))
-                return new BowerQuickInfo(textBuffer, _dte);
+                return new Bower.BowerQuickInfo(textBuffer, _dte);
             else if (Helper.IsSupportedFile(_dte, "package.json"))
-                return new NpmQuickInfo(textBuffer, _dte);
+                return new NPM.NpmQuickInfo(textBuffer, _dte);
 
             return null;
         }

@@ -46,11 +46,13 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="Bower\Constants.cs" />
     <Compile Include="Bower\QuickInfo\BowerInfoBox.xaml.cs">
       <DependentUpon>BowerInfoBox.xaml</DependentUpon>
     </Compile>
     <Compile Include="Bower\BowerPackage.cs" />
     <Compile Include="Bower\QuickInfo\BowerQuickInfo.cs" />
+    <Compile Include="NPM\Constants.cs" />
     <Compile Include="NPM\NpmPackage.cs" />
     <Compile Include="NPM\QuickInfo\NpmQuickInfo.cs" />
     <Compile Include="NPM\QuickInfo\NpmInfoBox.xaml.cs">

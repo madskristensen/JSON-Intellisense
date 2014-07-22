@@ -1,6 +1,6 @@
 ﻿using System.Windows.Controls;
 
-namespace JSON_Intellisense
+namespace JSON_Intellisense.NPM
 {
     public partial class NpmInfoBox : UserControl
     {

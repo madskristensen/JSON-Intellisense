@@ -1,6 +1,6 @@
 ﻿using System.Windows.Controls;
 
-namespace JSON_Intellisense
+namespace JSON_Intellisense.Bower
 {
     public partial class BowerInfoBox : UserControl
     {

@@ -16,7 +16,7 @@ using Microsoft.VisualStudio.Shell;
 using Microsoft.VisualStudio.Utilities;
 using Microsoft.Web.Editor.Intellisense;
 
-namespace JSON_Intellisense
+namespace JSON_Intellisense.NPM
 {
     [Export(typeof(IJSONCompletionListProvider))]
     [Name("NpmNameCompletionProvider")]
@@ -36,7 +36,7 @@ namespace JSON_Intellisense
             if (_dte == null)
                 _dte = serviceProvider.GetService(typeof(DTE)) as DTE2;
 
-            if (!Helper.IsSupportedFile(_dte, "package.json"))
+            if (!Helper.IsSupportedFile(_dte, Constants.FileName))
                 yield break;
 
             if (NpmNameCompletionEntry._searchResults != null)

@@ -12,7 +12,7 @@ using Microsoft.VisualStudio.Utilities;
 using Microsoft.Web.Editor.Intellisense;
 using Newtonsoft.Json.Linq;
 
-namespace JSON_Intellisense
+namespace JSON_Intellisense.NPM
 {
     [Export(typeof(IJSONCompletionListProvider))]
     [Name("NpmVersionCompletionProvider")]
@@ -33,7 +33,7 @@ namespace JSON_Intellisense
             if (_dte == null)
                 _dte = serviceProvider.GetService(typeof(DTE)) as DTE2;
 
-            if (!Helper.IsSupportedFile(_dte, "package.json"))
+            if (!Helper.IsSupportedFile(_dte, Constants.FileName))
                 yield break;
 
             if (_version != null)
@@ -61,7 +61,7 @@ namespace JSON_Intellisense
             ThreadPool.QueueUserWorkItem(o =>
             {
                 string package = dependency.Name.Text.Trim('"');
-                string url = "http://registry.npmjs.org/" + package + "/latest";
+                string url = string.Format(Constants.PackageUrl, package);
                 string result = Helper.DownloadText(_dte, url);
                 _version = ParseVersion(result);
 
