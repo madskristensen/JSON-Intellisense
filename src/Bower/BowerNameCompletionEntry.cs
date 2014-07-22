@@ -17,13 +17,13 @@ using Newtonsoft.Json.Linq;
 
 namespace JSON_Intellisense
 {
-    class NpmNameCompletionEntry : JSONCompletionEntry
+    class BowerNameCompletionEntry : JSONCompletionEntry
     {
-        private static ImageSource _glyph = BitmapFrame.Create(new Uri("pack://application:,,,/JSON Intellisense;component/Resources/npm.png", UriKind.RelativeOrAbsolute));//GlyphService.GetGlyph(StandardGlyphGroup.GlyphLibrary, StandardGlyphItem.GlyphItemPublic);
+        private static ImageSource _glyph = BitmapFrame.Create(new Uri("pack://application:,,,/JSON Intellisense;component/Resources/bower.png", UriKind.RelativeOrAbsolute));//GlyphService.GetGlyph(StandardGlyphGroup.GlyphLibrary, StandardGlyphItem.GlyphItemPublic);
         private DTE2 _dte;
         private JSONDocument _doc;
 
-        public NpmNameCompletionEntry(string text, IIntellisenseSession session, DTE2 dte, JSONDocument doc)
+        public BowerNameCompletionEntry(string text, IIntellisenseSession session, DTE2 dte, JSONDocument doc)
             : this(text, null, session)
         {
             _dte = dte;
@@ -33,19 +33,19 @@ namespace JSON_Intellisense
             base.FilterType = CompletionEntryFilterTypes.AlwaysVisible;
         }
 
-        public NpmNameCompletionEntry(string text, StandardGlyphGroup glyph, IIntellisenseSession session)
+        public BowerNameCompletionEntry(string text, StandardGlyphGroup glyph, IIntellisenseSession session)
             : this(text, null, glyph, session)
         { }
 
-        public NpmNameCompletionEntry(string text, string description, IIntellisenseSession session)
+        public BowerNameCompletionEntry(string text, string description, IIntellisenseSession session)
             : base(text, "\"" + text + "\"", description, _glyph, null, false, session as ICompletionSession)
         { }
 
-        public NpmNameCompletionEntry(string text, string description, StandardGlyphGroup glyph, IIntellisenseSession session)
+        public BowerNameCompletionEntry(string text, string description, StandardGlyphGroup glyph, IIntellisenseSession session)
             : base(text, "\"" + text + "\"", description, GlyphService.GetGlyph(glyph, StandardGlyphItem.GlyphItemPublic), null, false, session as ICompletionSession)
         { }
 
-        public NpmNameCompletionEntry(string displayText, string insertionText, string description, IIntellisenseSession session)
+        public BowerNameCompletionEntry(string displayText, string insertionText, string description, IIntellisenseSession session)
             : base(displayText, insertionText, description, _glyph, null, false, session as ICompletionSession)
         { }
 
@@ -53,7 +53,7 @@ namespace JSON_Intellisense
 
         public override void Commit()
         {
-            if (base.DisplayText != "Search NPM...")
+            if (base.DisplayText != "Search Bower...")
             {
                 base.Commit();
             }
@@ -66,7 +66,7 @@ namespace JSON_Intellisense
 
                 ThreadPool.QueueUserWorkItem(o =>
                 {
-                    string result = SearchNPM(searchTerm);
+                    string result = SearchBower(searchTerm);
                     var children = GetChildren(result);
 
                     if (children.Count() == 0)
@@ -76,7 +76,7 @@ namespace JSON_Intellisense
                     }
 
                     _dte.StatusBar.Text = string.Empty;
-                    _searchResults = children.Select(c => (string)c["value"]);
+                    _searchResults = children.Take(25).Select(c => (string)c["name"]);
 
                     Helper.ExecuteCommand(_dte, "Edit.ListMembers");
                 });
@@ -109,14 +109,14 @@ namespace JSON_Intellisense
             }
         }
 
-        private string SearchNPM(string searchTerm)
+        private string SearchBower(string searchTerm)
         {
-            _dte.StatusBar.Text = "Searching NPM for " + searchTerm + "...";
+            _dte.StatusBar.Text = "Searching Bower for " + searchTerm + "...";
             _dte.StatusBar.Animate(true, vsStatusAnimation.vsStatusAnimationSync);
 
             try
             {
-                Uri url = new Uri("https://typeahead.npmjs.com/search?q=" + HttpUtility.UrlEncode(searchTerm));
+                Uri url = new Uri("https://bower.herokuapp.com/packages/search/" + HttpUtility.UrlEncode(searchTerm));
                 using (WebClient client = new WebClient())
                 {
                     return client.DownloadString(url);

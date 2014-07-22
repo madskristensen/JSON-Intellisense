@@ -14,14 +14,14 @@ namespace JSON_Intellisense
             }
         }
 
-        public static bool IsSupportedFile(DTE2 dte)
+        public static bool IsSupportedFile(DTE2 dte, string allowedName)
         {
             if (dte == null)
                 return false;
 
             var doc = dte.ActiveDocument;
 
-            if (doc == null || string.IsNullOrEmpty(doc.FullName) || Path.GetFileName(doc.FullName) != "package.json")
+            if (doc == null || string.IsNullOrEmpty(doc.FullName) || Path.GetFileName(doc.FullName) != allowedName)
                 return false;
 
             return true;

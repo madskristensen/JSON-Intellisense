@@ -47,6 +47,8 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="Helper.cs" />
+    <Compile Include="Bower\BowerNameCompletionEntry.cs" />
+    <Compile Include="Bower\BowerNameCompletionProvider.cs" />
     <Compile Include="NPM\NpmVersionCompletionEntry.cs" />
     <Compile Include="NPM\NpmNameCompletionEntry.cs" />
     <Compile Include="NPM\NpmVersionCompletionProvider.cs" />
@@ -121,6 +123,7 @@
     <Reference Include="PresentationCore" />
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.Composition" />
+    <Reference Include="System.Web" />
     <Reference Include="System.Xaml" />
     <Reference Include="WindowsBase" />
   </ItemGroup>
@@ -132,6 +135,7 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       <IncludeInVSIX>true</IncludeInVSIX>
     </Content>
+    <Resource Include="Resources\bower.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(VSToolsPath)\VSSDK\Microsoft.VsSDK.targets" Condition="'$(VSToolsPath)' != ''" />

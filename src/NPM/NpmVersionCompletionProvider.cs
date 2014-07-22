@@ -34,7 +34,7 @@ namespace JSON_Intellisense
             if (_dte == null)
                 _dte = serviceProvider.GetService(typeof(DTE)) as DTE2;
 
-            if (!Helper.IsSupportedFile(_dte))
+            if (!Helper.IsSupportedFile(_dte, "package.json"))
                 yield break;
 
             if (_version != null)
