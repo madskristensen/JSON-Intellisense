@@ -3,7 +3,7 @@
   <Metadata>
     <Identity Id="aaa8d5c5-24d8-4c45-9620-9f77b2aa6363" Version="1.0" Language="en-US" Publisher="Mads Kristensen" />
     <DisplayName>JSON Intellisense for VS2013 Update 3</DisplayName>
-    <Description xml:space="preserve">Gives support inside package.json files for searching for online NPM packages directly in Intellisense</Description>
+    <Description xml:space="preserve">Search for online NPM and Bower packages directly within Intellisense</Description>
     <License>License.txt</License>
   </Metadata>
   <Installation>
