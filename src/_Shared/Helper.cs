@@ -3,11 +3,26 @@ using System.IO;
 using System.Net;
 using EnvDTE;
 using EnvDTE80;
+using Microsoft.JSON.Core.Parser;
+using Microsoft.VisualStudio.Language.Intellisense;
 
 namespace JSON_Intellisense
 {
     static class Helper
     {
+        public static string GetMemberName(this JSONDocument doc, ICompletionSession session)
+        {
+            if (session == null)
+                return null;
+
+            JSONParseItem member = doc.ItemBeforePosition(session.TextView.Caret.Position.BufferPosition.Position);
+
+            if (member != null)
+                return member.Text.Trim('"');
+
+            return null;
+        }
+
         public static void ExecuteCommand(DTE2 dte, string commandName)
         {
             var command = dte.Commands.Item(commandName);

@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using System.Web;
@@ -32,7 +31,7 @@ namespace JSON_Intellisense.NPM
             }
             else
             {
-                string searchTerm = FindSearchTerm();
+                string searchTerm = _doc.GetMemberName(base.Session);
 
                 if (string.IsNullOrEmpty(searchTerm))
                     return;
@@ -74,19 +73,6 @@ namespace JSON_Intellisense.NPM
             { }
 
             return JEnumerable<JToken>.Empty;
-        }
-
-        private string FindSearchTerm()
-        {
-            try
-            {
-                JSONParseItem member = _doc.ItemBeforePosition(base.Session.TextView.Caret.Position.BufferPosition.Position);
-                return member.Text.Trim('"');
-            }
-            catch (Exception)
-            {
-                return null;
-            }
         }
     }
 }
