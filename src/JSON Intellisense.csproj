@@ -60,6 +60,7 @@
     </Compile>
     <Compile Include="_Shared\QuickInfo\QuickInfoController.cs" />
     <Compile Include="_Shared\QuickInfo\QuickInfoControllerProvider.cs" />
+    <Compile Include="_Shared\QuickInfo\QuickInfoSourceBase.cs" />
     <Compile Include="_Shared\QuickInfo\QuickInfoSourceProvider.cs" />
     <Compile Include="_Shared\Helper.cs" />
     <Compile Include="Bower\Completion\BowerNameCompletionEntry.cs" />
