@@ -26,7 +26,7 @@ namespace JSON_Intellisense.NPM
             get { return Constants.FileName; }
         }
 
-        protected override IEnumerable<CompletionEntry> GetEntries(JSONCompletionContext context)
+        protected override IEnumerable<JSONCompletionEntry> GetEntries(JSONCompletionContext context)
         {
             if (_version != null)
             {

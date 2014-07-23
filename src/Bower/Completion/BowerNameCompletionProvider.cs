@@ -23,7 +23,7 @@ namespace JSON_Intellisense.Bower
             get { return Constants.FileName; }
         }
 
-        protected override IEnumerable<CompletionEntry> GetEntries(JSONCompletionContext context)
+        protected override IEnumerable<JSONCompletionEntry> GetEntries(JSONCompletionContext context)
         {
             if (BowerNameCompletionEntry._searchResults != null)
             {

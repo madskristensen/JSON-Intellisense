@@ -22,18 +22,18 @@ namespace JSON_Intellisense._Shared.Completion
 
         public abstract string SupportedFileName { get; }
 
-        public IEnumerable<CompletionEntry> GetListEntries(JSONCompletionContext context)
+        public IEnumerable<JSONCompletionEntry> GetListEntries(JSONCompletionContext context)
         {
             if (_dte == null)
                 _dte = serviceProvider.GetService(typeof(DTE)) as DTE2;
 
             if (!Helper.IsSupportedFile(_dte, SupportedFileName))
-                return new List<CompletionEntry>();
+                return new List<JSONCompletionEntry>();
 
             return GetEntries(context);
         }
 
-        protected abstract IEnumerable<CompletionEntry> GetEntries(JSONCompletionContext context);
+        protected abstract IEnumerable<JSONCompletionEntry> GetEntries(JSONCompletionContext context);
 
         protected JSONMember GetDependency(JSONCompletionContext context)
         {
