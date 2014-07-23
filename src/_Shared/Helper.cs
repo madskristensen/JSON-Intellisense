@@ -2,23 +2,37 @@
 using System.IO;
 using System.Net;
 using EnvDTE;
+using System.Linq;
 using EnvDTE80;
+using Microsoft.CSS.Core;
 using Microsoft.JSON.Core.Parser;
-using Microsoft.VisualStudio.Language.Intellisense;
 
 namespace JSON_Intellisense
 {
     static class Helper
     {
-        public static string GetMemberName(this JSONDocument doc, ICompletionSession session)
+        public static JSONBlockItem ParseJSON(string document)
         {
-            if (session == null)
+            if (string.IsNullOrEmpty(document))
                 return null;
 
-            JSONParseItem member = doc.ItemBeforePosition(session.TextView.Caret.Position.BufferPosition.Position);
+            JSONTree tree = new JSONTree();
 
-            if (member != null)
-                return member.Text.Trim('"');
+            try
+            {
+                tree.TextProvider = new StringTextProvider(document);
+                var child = tree.JSONDocument.Children.First();
+
+                var obj = child as JSONBlockItem;
+                if (obj != null)
+                    return obj;
+
+                var arr = child as JSONArray;
+                if (arr != null)
+                    return arr;
+            }
+            catch (Exception)
+            { }
 
             return null;
         }

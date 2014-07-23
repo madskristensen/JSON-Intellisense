@@ -7,7 +7,7 @@ using Microsoft.JSON.Editor;
 using Microsoft.VisualStudio.Language.Intellisense;
 using Microsoft.VisualStudio.Text;
 
-namespace JSON_Intellisense._Shared.QuickInfo
+namespace JSON_Intellisense
 {
     public abstract class QuickInfoSourceBase : IQuickInfoSource
     {

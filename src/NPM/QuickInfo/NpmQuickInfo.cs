@@ -1,10 +1,8 @@
 ﻿using System.Web;
 using System.Windows;
 using EnvDTE80;
-using JSON_Intellisense._Shared.QuickInfo;
 using Microsoft.JSON.Core.Parser;
 using Microsoft.VisualStudio.Text;
-using Newtonsoft.Json.Linq;
 
 namespace JSON_Intellisense.NPM
 {
@@ -34,14 +32,14 @@ namespace JSON_Intellisense.NPM
 
             try
             {
-                JObject obj = JObject.Parse(result);
+                var root = Helper.ParseJSON(result);
 
                 return new NpmPackage()
                 {
                     Name = packageName,
-                    Description = (string)obj["description"],
-                    Version = (string)obj["version"],
-                    Author = (string)obj["author"]["name"]
+                    Description = root.SelectItemText("description"),
+                    Version = root.SelectItemText("version"),
+                    Author = root.SelectItemText("author/name"),
                 };
             }
             catch

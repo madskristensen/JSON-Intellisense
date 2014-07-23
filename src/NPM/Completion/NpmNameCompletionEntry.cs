@@ -6,7 +6,6 @@ using EnvDTE80;
 using Microsoft.JSON.Core.Parser;
 using Microsoft.JSON.Editor.Completion;
 using Microsoft.VisualStudio.Language.Intellisense;
-using Newtonsoft.Json.Linq;
 
 namespace JSON_Intellisense.NPM
 {
@@ -56,23 +55,24 @@ namespace JSON_Intellisense.NPM
                 }
 
                 _dte.StatusBar.Text = string.Empty;
-                _searchResults = children.Select(c => (string)c["value"]);
+                _searchResults = children;
 
                 Helper.ExecuteCommand(_dte, "Edit.ListMembers");
             });
         }
 
-        private static JEnumerable<JToken> GetChildren(string result)
+        private static IEnumerable<string> GetChildren(string result)
         {
-            try
-            {
-                JArray array = JArray.Parse(result);
-                return array.Children();
-            }
-            catch
-            { }
+            var arr = Helper.ParseJSON(result) as JSONArray;
 
-            return JEnumerable<JToken>.Empty;
+            if (arr == null)
+                yield break;
+
+            foreach (JSONBlockItemChild child in arr.BlockItemChildren)
+            {
+                var foo = child.Children.First() as JSONObject;
+                yield return foo.SelectItemText("value");
+            }
         }
     }
 }

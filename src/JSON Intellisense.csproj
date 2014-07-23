@@ -69,6 +69,7 @@
       <DependentUpon>NpmInfoBox.xaml</DependentUpon>
     </Compile>
     <Compile Include="_Shared\Completion\CompletionProviderBase.cs" />
+    <Compile Include="_Shared\JSONExtensions.cs" />
     <Compile Include="_Shared\QuickInfo\QuickInfoController.cs" />
     <Compile Include="_Shared\QuickInfo\QuickInfoControllerProvider.cs" />
     <Compile Include="_Shared\QuickInfo\QuickInfoSourceBase.cs" />
@@ -82,7 +83,6 @@
     <Compile Include="NPM\Completion\NpmNameCompletionProvider.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="packages.config" />
     <None Include="source.extension.vsixmanifest">
       <SubType>Designer</SubType>
     </None>
@@ -132,10 +132,6 @@
     <Reference Include="Microsoft.Web.Editor, Version=12.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>$(DevEnvDir)\CommonExtensions\Microsoft\Web\Editor\Microsoft.Web.Editor.dll</HintPath>
-    </Reference>
-    <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\Newtonsoft.Json.6.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />

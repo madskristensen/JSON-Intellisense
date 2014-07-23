@@ -7,7 +7,6 @@ using Microsoft.JSON.Editor.Completion;
 using Microsoft.JSON.Editor.Completion.Def;
 using Microsoft.VisualStudio.Utilities;
 using Microsoft.Web.Editor.Intellisense;
-using Newtonsoft.Json.Linq;
 
 namespace JSON_Intellisense.NPM
 {
@@ -62,13 +61,10 @@ namespace JSON_Intellisense.NPM
 
         private string ParseVersion(string result)
         {
-            try
-            {
-                JObject obj = JObject.Parse(result);
-                return (string)obj["version"];
-            }
-            catch
-            { }
+            var root = Helper.ParseJSON(result);
+
+            if (root != null)
+                return root.SelectItemText("version");
 
             return null;
         }

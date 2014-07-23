@@ -1,10 +1,10 @@
-﻿using System.Web;
+﻿using System.Linq;
+using System.Web;
 using System.Windows;
 using EnvDTE80;
-using JSON_Intellisense._Shared.QuickInfo;
+using Microsoft.CSS.Core;
 using Microsoft.JSON.Core.Parser;
 using Microsoft.VisualStudio.Text;
-using Newtonsoft.Json.Linq;
 
 namespace JSON_Intellisense.Bower
 {
@@ -34,13 +34,13 @@ namespace JSON_Intellisense.Bower
 
             try
             {
-                JObject obj = JObject.Parse(result);
+                var root = Helper.ParseJSON(result);
 
                 return new BowerPackage()
                 {
                     Name = packageName,
-                    Url = (string)obj["url"],
-                    Hits = (int)obj["hits"],
+                    Url = root.SelectItemText("url"),
+                    Hits = int.Parse(root.SelectItemText("hits"))
                 };
             }
             catch
