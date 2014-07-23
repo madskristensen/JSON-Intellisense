@@ -16,8 +16,8 @@ Live search results from both NPM and Bower show up in Intellisense
 ### Hover tooltips  
 Get the information about the packages on mouse hover
 
-Light theme:
+Light theme:  
 ![Screenshot](https://raw.githubusercontent.com/madskristensen/JSON-Intellisense/master/art/tooltip-light.png)
 
-Dark theme:
+Dark theme:  
 ![Screenshot](https://raw.githubusercontent.com/madskristensen/JSON-Intellisense/master/art/tooltip-dark.png)
