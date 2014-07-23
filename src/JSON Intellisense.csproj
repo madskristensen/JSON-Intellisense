@@ -80,7 +80,6 @@
     <Compile Include="NPM\Completion\NpmNameCompletionEntry.cs" />
     <Compile Include="NPM\Completion\NpmVersionCompletionProvider.cs" />
     <Compile Include="NPM\Completion\NpmNameCompletionProvider.cs" />
-    <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
