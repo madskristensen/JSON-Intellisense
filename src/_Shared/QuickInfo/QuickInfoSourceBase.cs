@@ -1,14 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Web;
 using System.Windows;
 using EnvDTE80;
-using JSON_Intellisense.NPM;
 using Microsoft.JSON.Core.Parser;
 using Microsoft.JSON.Editor;
 using Microsoft.VisualStudio.Language.Intellisense;
 using Microsoft.VisualStudio.Text;
-using Newtonsoft.Json.Linq;
 
 namespace JSON_Intellisense._Shared.QuickInfo
 {
@@ -35,27 +32,31 @@ namespace JSON_Intellisense._Shared.QuickInfo
             if (!point.HasValue)
                 return;
 
-            JSONEditorDocument doc = JSONEditorDocument.FromTextBuffer(_buffer);
-            JSONParseItem item = doc.JSONDocument.ItemBeforePosition(point.Value.Position);
+            using (JSONEditorDocument doc = JSONEditorDocument.FromTextBuffer(_buffer))
+            {
+                JSONParseItem item = doc.JSONDocument.ItemBeforePosition(point.Value.Position);
 
-            if (item == null || !item.IsValid)
-                return;
+                if (item == null || !item.IsValid)
+                    return;
 
-            JSONMember dependency = item.FindType<JSONMember>();
-            if (dependency == null)
-                return;
+                JSONMember dependency = item.FindType<JSONMember>();
+                if (dependency == null)
+                    return;
 
-            var parent = dependency.Parent.FindType<JSONMember>();
-            if (parent == null || !parent.UnquotedNameText.EndsWith("dependencies", StringComparison.OrdinalIgnoreCase))
-                return;
+                var parent = dependency.Parent.FindType<JSONMember>();
+                if (parent == null || !parent.UnquotedNameText.EndsWith("dependencies", StringComparison.OrdinalIgnoreCase))
+                    return;
 
-            applicableToSpan = _buffer.CurrentSnapshot.CreateTrackingSpan(item.Start, item.Length, SpanTrackingMode.EdgeNegative);
+                applicableToSpan = _buffer.CurrentSnapshot.CreateTrackingSpan(item.Start, item.Length, SpanTrackingMode.EdgeNegative);
 
-            UIElement element = Process(dependency.UnquotedNameText, item);
-            qiContent.Add(element);
+                UIElement element = CreateTooltip(dependency.UnquotedNameText, item);
+
+                if (element != null)
+                    qiContent.Add(element);
+            }
         }
 
-        public abstract UIElement Process(string name, JSONParseItem item);
+        public abstract UIElement CreateTooltip(string name, JSONParseItem item);
 
         public void Dispose()
         {

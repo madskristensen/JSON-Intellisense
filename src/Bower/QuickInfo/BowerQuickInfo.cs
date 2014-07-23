@@ -14,7 +14,7 @@ namespace JSON_Intellisense.Bower
             :base (subjectBuffer, dte)
         { }
 
-        public override UIElement Process(string name, JSONParseItem item)
+        public override UIElement CreateTooltip(string name, JSONParseItem item)
         {
             BowerPackage package = GetText(name);
 

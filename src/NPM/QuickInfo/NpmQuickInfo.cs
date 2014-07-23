@@ -14,7 +14,7 @@ namespace JSON_Intellisense.NPM
             : base(subjectBuffer, dte)
         { }
 
-        public override UIElement Process(string name, JSONParseItem item)
+        public override UIElement CreateTooltip(string name, JSONParseItem item)
         {
             NpmPackage package = GetText(name);
 
