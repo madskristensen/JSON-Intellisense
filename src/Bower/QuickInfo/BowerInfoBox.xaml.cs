@@ -1,4 +1,6 @@
 ﻿using System.Windows.Controls;
+using System.Windows.Media;
+using Microsoft.VisualStudio.Shell;
 
 namespace JSON_Intellisense.Bower
 {
@@ -15,7 +17,7 @@ namespace JSON_Intellisense.Bower
         public static BowerInfoBox Create(BowerPackage package)
         {
             _box.lblName.Content = package.Name;
-            _box.lblUrl.Content = package.Url;
+            _box.lblUrl.Content = package.Url.Replace("git://", string.Empty).Replace(".git", string.Empty);
             _box.lblHits.Content = package.Hits.ToString("N0");
 
             return _box;
