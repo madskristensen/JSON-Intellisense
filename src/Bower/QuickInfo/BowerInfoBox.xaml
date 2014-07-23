@@ -11,7 +11,7 @@
         <Label x:Name="lblUrl" Content="Label" HorizontalAlignment="Left" Margin="68,17,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.158,0.115"/>
         <Label Content="Hits" HorizontalAlignment="Left" Margin="20,34,0,-4" VerticalAlignment="Top" FontWeight="Bold"/>
         <Label x:Name="lblHits" Content="Label" HorizontalAlignment="Left" Margin="68,34,0,-4" VerticalAlignment="Top" RenderTransformOrigin="0.158,0.115"/>
-        <Image Height="16" Margin="0" VerticalAlignment="Top" RenderTransformOrigin="0.31,-0.517" Source="/JSON Intellisense;component/Resources/bower.png" HorizontalAlignment="Left"/>
+        <Image x:Name="imgLogo" Height="16" Margin="0" VerticalAlignment="Top" RenderTransformOrigin="0.31,-0.517" HorizontalAlignment="Left"/>
 
     </Grid>
 </UserControl>

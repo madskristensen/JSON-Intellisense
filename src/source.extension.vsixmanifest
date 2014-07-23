@@ -5,9 +5,9 @@
     <DisplayName>JSON Intellisense for VS2013 Update 3</DisplayName>
     <Description xml:space="preserve">Search for online NPM and Bower packages directly within Intellisense</Description>
     <MoreInfo>https://github.com/madskristensen/JSON-Intellisense</MoreInfo>
-    <License>License.txt</License>
-    <Icon>icon.png</Icon>
-    <PreviewImage>logo-250.png</PreviewImage>
+    <License>_Shared\Resources\License.txt</License>
+    <Icon>_Shared\Resources\icon.png</Icon>
+    <PreviewImage>_Shared\Resources\preview.png</PreviewImage>
   </Metadata>
   <Installation>
     <InstallationTarget Version="[12.0,13.0)" Id="Microsoft.VisualStudio.Pro" />

@@ -68,6 +68,7 @@
     <Compile Include="NPM\QuickInfo\NpmInfoBox.xaml.cs">
       <DependentUpon>NpmInfoBox.xaml</DependentUpon>
     </Compile>
+    <Compile Include="_Shared\Completion\CompletionProviderBase.cs" />
     <Compile Include="_Shared\QuickInfo\QuickInfoController.cs" />
     <Compile Include="_Shared\QuickInfo\QuickInfoControllerProvider.cs" />
     <Compile Include="_Shared\QuickInfo\QuickInfoSourceBase.cs" />
@@ -153,19 +154,22 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Resources\npm.png" />
+    <Resource Include="NPM\Resources\npm.png" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="icon.png">
+    <Content Include="_Shared\Resources\icon.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       <IncludeInVSIX>true</IncludeInVSIX>
     </Content>
-    <Content Include="License.txt">
+    <Content Include="_Shared\Resources\License.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       <IncludeInVSIX>true</IncludeInVSIX>
     </Content>
-    <Content Include="preview.png" />
-    <Resource Include="Resources\bower.png" />
+    <Content Include="_Shared\Resources\preview.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <IncludeInVSIX>true</IncludeInVSIX>
+    </Content>
+    <Resource Include="Bower\Resources\bower.png" />
   </ItemGroup>
   <ItemGroup>
     <Page Include="Bower\QuickInfo\BowerInfoBox.xaml">

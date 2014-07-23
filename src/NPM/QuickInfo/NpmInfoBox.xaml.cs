@@ -9,6 +9,7 @@ namespace JSON_Intellisense.NPM
         public NpmInfoBox()
         {
             InitializeComponent();
+            imgLogo.Source = Constants.Icon;
         }
 
         public static NpmInfoBox Create(NpmPackage package)

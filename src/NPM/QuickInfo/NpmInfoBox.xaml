@@ -11,7 +11,7 @@
         <Label x:Name="lblDesc" Content="Label" HorizontalAlignment="Left" Margin="98,17,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.158,0.115"/>
         <Label Content="Latest" HorizontalAlignment="Left" Margin="20,34,0,-4" VerticalAlignment="Top" FontWeight="Bold"/>
         <Label x:Name="lblLatest" Content="Label" HorizontalAlignment="Left" Margin="98,34,0,-4" VerticalAlignment="Top" RenderTransformOrigin="0.158,0.115"/>
-        <Image Height="16" Margin="0" VerticalAlignment="Top" RenderTransformOrigin="0.31,-0.517" Source="/JSON Intellisense;component/Resources/npm.png" HorizontalAlignment="Left"/>
+        <Image x:Name="imgLogo" Height="16" Margin="0" VerticalAlignment="Top" RenderTransformOrigin="0.31,-0.517" HorizontalAlignment="Left"/>
         <Label Content="Author" HorizontalAlignment="Left" Margin="20,52,0,-3" VerticalAlignment="Top" FontWeight="Bold"/>
         <Label x:Name="lblAuthor" Content="Label" HorizontalAlignment="Left" Margin="98,52,0,-3" VerticalAlignment="Top" RenderTransformOrigin="0.158,0.115"/>
 

@@ -9,6 +9,7 @@ namespace JSON_Intellisense.Bower
         public BowerInfoBox()
         {
             InitializeComponent();
+            imgLogo.Source = Constants.Icon;
         }
 
         public static BowerInfoBox Create(BowerPackage package)

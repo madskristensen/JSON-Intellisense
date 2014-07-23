@@ -1,12 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.ComponentModel.Composition;
-using EnvDTE;
-using EnvDTE80;
+using JSON_Intellisense._Shared.Completion;
 using Microsoft.JSON.Core.Parser;
 using Microsoft.JSON.Editor.Completion;
 using Microsoft.JSON.Editor.Completion.Def;
-using Microsoft.VisualStudio.Shell;
 using Microsoft.VisualStudio.Utilities;
 using Microsoft.Web.Editor.Intellisense;
 
@@ -14,25 +11,20 @@ namespace JSON_Intellisense.Bower
 {
     [Export(typeof(IJSONCompletionListProvider))]
     [Name("BowerNameCompletionProvider")]
-    class BowerNameCompletionProvider : IJSONCompletionListProvider
+    class BowerNameCompletionProvider : CompletionProviderBase
     {
-        [Import]
-        private SVsServiceProvider serviceProvider { get; set; }
-        private static DTE2 _dte;
-
-        public JSONCompletionContextType ContextType
+        public override JSONCompletionContextType ContextType
         {
             get { return JSONCompletionContextType.PropertyName; }
         }
 
-        public IEnumerable<CompletionEntry> GetListEntries(JSONCompletionContext context)
+        public override string SupportedFileName
         {
-            if (_dte == null)
-                _dte = serviceProvider.GetService(typeof(DTE)) as DTE2;
+            get { return Constants.FileName; }
+        }
 
-            if (!Helper.IsSupportedFile(_dte, Constants.FileName))
-                yield break;
-
+        protected override IEnumerable<CompletionEntry> GetEntries(JSONCompletionContext context)
+        {
             if (BowerNameCompletionEntry._searchResults != null)
             {
                 foreach (string value in BowerNameCompletionEntry._searchResults)
@@ -44,13 +36,10 @@ namespace JSON_Intellisense.Bower
             }
             else
             {
-                JSONMember dependency = context.ContextItem.FindType<JSONMember>();
+                JSONMember dependency = GetDependency(context);
 
-                var parent = dependency.Parent.FindType<JSONMember>();
-                if (parent == null || !parent.Name.Text.Trim('"').EndsWith("dependencies", StringComparison.OrdinalIgnoreCase))
-                    yield break;
-
-                yield return new BowerNameCompletionEntry("Search Bower...", context.Session, _dte, dependency.JSONDocument);
+                if (dependency != null)
+                    yield return new BowerNameCompletionEntry("Search Bower...", context.Session, _dte, dependency.JSONDocument);
             }
         }
     }

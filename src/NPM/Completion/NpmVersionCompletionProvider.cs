@@ -1,13 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.ComponentModel.Composition;
 using System.Threading;
-using EnvDTE;
-using EnvDTE80;
+using JSON_Intellisense._Shared.Completion;
 using Microsoft.JSON.Core.Parser;
 using Microsoft.JSON.Editor.Completion;
 using Microsoft.JSON.Editor.Completion.Def;
-using Microsoft.VisualStudio.Shell;
 using Microsoft.VisualStudio.Utilities;
 using Microsoft.Web.Editor.Intellisense;
 using Newtonsoft.Json.Linq;
@@ -16,26 +13,22 @@ namespace JSON_Intellisense.NPM
 {
     [Export(typeof(IJSONCompletionListProvider))]
     [Name("NpmVersionCompletionProvider")]
-    class NpmVersionCompletionProvider : IJSONCompletionListProvider
+    class NpmVersionCompletionProvider : CompletionProviderBase
     {
-        [Import]
-        private SVsServiceProvider serviceProvider { get; set; }
-        private static DTE2 _dte;
         internal static string _version;
 
-        public JSONCompletionContextType ContextType
+        public override JSONCompletionContextType ContextType
         {
             get { return JSONCompletionContextType.PropertyValue; }
         }
 
-        public IEnumerable<CompletionEntry> GetListEntries(JSONCompletionContext context)
+        public override string SupportedFileName
         {
-            if (_dte == null)
-                _dte = serviceProvider.GetService(typeof(DTE)) as DTE2;
+            get { return Constants.FileName; }
+        }
 
-            if (!Helper.IsSupportedFile(_dte, Constants.FileName))
-                yield break;
-
+        protected override IEnumerable<CompletionEntry> GetEntries(JSONCompletionContext context)
+        {
             if (_version != null)
             {
                 yield return new NpmVersionCompletionEntry(_version, "The currently latest version of the package", context.Session, _dte);
@@ -46,13 +39,10 @@ namespace JSON_Intellisense.NPM
             }
             else
             {
-                JSONMember dependency = context.ContextItem.FindType<JSONMember>();
-                JSONMember parent = dependency.Parent.FindType<JSONMember>();
+                JSONMember dependency = GetDependency(context);
 
-                if (parent == null || !parent.Name.Text.Trim('"').EndsWith("dependencies", StringComparison.OrdinalIgnoreCase))
-                    yield break;
-
-                ExecuteRemoteSearch(dependency);
+                if (dependency != null)
+                    ExecuteRemoteSearch(dependency);
             }
         }
 
