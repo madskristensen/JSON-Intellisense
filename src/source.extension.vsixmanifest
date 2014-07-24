@@ -2,7 +2,7 @@
 <PackageManifest Version="2.0.0" xmlns="http://schemas.microsoft.com/developer/vsx-schema/2011" xmlns:d="http://schemas.microsoft.com/developer/vsx-schema-design/2011">
   <Metadata>
     <Identity Id="aaa8d5c5-24d8-4c45-9620-9f77b2aa6363" Version="0.1" Language="en-US" Publisher="Mads Kristensen" />
-    <DisplayName>JSON Intellisense - beta</DisplayName>
+    <DisplayName>Package Intellisense - beta</DisplayName>
     <Description xml:space="preserve">Search for online NPM and Bower packages directly within Intellisense</Description>
     <MoreInfo>https://github.com/madskristensen/JSON-Intellisense</MoreInfo>
     <License>_Shared\Resources\License.txt</License>
