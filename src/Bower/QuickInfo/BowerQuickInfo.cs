@@ -1,8 +1,6 @@
-﻿using System.Linq;
-using System.Web;
+﻿using System.Web;
 using System.Windows;
 using EnvDTE80;
-using Microsoft.CSS.Core;
 using Microsoft.JSON.Core.Parser;
 using Microsoft.VisualStudio.Text;
 
@@ -44,7 +42,7 @@ namespace JSON_Intellisense.Bower
                 };
             }
             catch
-            { }
+            { /* JSON result is invalid. Ignore */ }
             finally
             {
                 _dte.StatusBar.Text = string.Empty;

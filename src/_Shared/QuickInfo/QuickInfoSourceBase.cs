@@ -32,28 +32,26 @@ namespace JSON_Intellisense
             if (!point.HasValue)
                 return;
 
-            using (JSONEditorDocument doc = JSONEditorDocument.FromTextBuffer(_buffer))
-            {
-                JSONParseItem item = doc.JSONDocument.ItemBeforePosition(point.Value.Position);
+            JSONEditorDocument doc = JSONEditorDocument.FromTextBuffer(_buffer);
+            JSONParseItem item = doc.JSONDocument.ItemBeforePosition(point.Value.Position);
 
-                if (item == null || !item.IsValid)
-                    return;
+            if (item == null || !item.IsValid)
+                return;
 
-                JSONMember dependency = item.FindType<JSONMember>();
-                if (dependency == null || dependency.Name != item)
-                    return;
+            JSONMember dependency = item.FindType<JSONMember>();
+            if (dependency == null || dependency.Name != item)
+                return;
 
-                var parent = dependency.Parent.FindType<JSONMember>();
-                if (parent == null || !parent.UnquotedNameText.EndsWith("dependencies", StringComparison.OrdinalIgnoreCase))
-                    return;
+            var parent = dependency.Parent.FindType<JSONMember>();
+            if (parent == null || !parent.UnquotedNameText.EndsWith("dependencies", StringComparison.OrdinalIgnoreCase))
+                return;
 
-                applicableToSpan = _buffer.CurrentSnapshot.CreateTrackingSpan(item.Start, item.Length, SpanTrackingMode.EdgeNegative);
+            applicableToSpan = _buffer.CurrentSnapshot.CreateTrackingSpan(item.Start, item.Length, SpanTrackingMode.EdgeNegative);
 
-                UIElement element = CreateTooltip(dependency.UnquotedNameText, item);
+            UIElement element = CreateTooltip(dependency.UnquotedNameText, item);
 
-                if (element != null)
-                    qiContent.Add(element);
-            }
+            if (element != null)
+                qiContent.Add(element);
         }
 
         public abstract UIElement CreateTooltip(string name, JSONParseItem item);

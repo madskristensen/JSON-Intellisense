@@ -60,7 +60,7 @@ namespace JSON_Intellisense.NPM
                 return package;
             }
             catch
-            { }
+            { /* JSON result is invalid. Ignore */ }
             finally
             {
                 _dte.StatusBar.Text = string.Empty;
