@@ -146,15 +146,12 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="_Shared\Resources\icon.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       <IncludeInVSIX>true</IncludeInVSIX>
     </Content>
     <Content Include="_Shared\Resources\License.txt">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       <IncludeInVSIX>true</IncludeInVSIX>
     </Content>
     <Content Include="_Shared\Resources\preview.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       <IncludeInVSIX>true</IncludeInVSIX>
     </Content>
     <Resource Include="Bower\Resources\bower.png" />

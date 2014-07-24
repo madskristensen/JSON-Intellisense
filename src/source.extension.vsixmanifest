@@ -1,8 +1,8 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <PackageManifest Version="2.0.0" xmlns="http://schemas.microsoft.com/developer/vsx-schema/2011" xmlns:d="http://schemas.microsoft.com/developer/vsx-schema-design/2011">
   <Metadata>
-    <Identity Id="aaa8d5c5-24d8-4c45-9620-9f77b2aa6363" Version="0.10" Language="en-US" Publisher="Mads Kristensen" />
-    <DisplayName>JSON Intellisense for VS2013 Update 3</DisplayName>
+    <Identity Id="aaa8d5c5-24d8-4c45-9620-9f77b2aa6363" Version="1.0" Language="en-US" Publisher="Mads Kristensen" />
+    <DisplayName>JSON Intellisense</DisplayName>
     <Description xml:space="preserve">Search for online NPM and Bower packages directly within Intellisense</Description>
     <MoreInfo>https://github.com/madskristensen/JSON-Intellisense</MoreInfo>
     <License>_Shared\Resources\License.txt</License>
@@ -10,7 +10,7 @@
     <PreviewImage>_Shared\Resources\preview.png</PreviewImage>
   </Metadata>
   <Installation>
-    <InstallationTarget Version="[12.0,13.0)" Id="Microsoft.VisualStudio.Pro" />
+    <InstallationTarget Id="Microsoft.VisualStudio.Pro" Version="[12.0.30626,12.0.30735)" />
   </Installation>
   <Dependencies>
     <Dependency Id="Microsoft.Framework.NDP" DisplayName="Microsoft .NET Framework" d:Source="Manual" Version="[4.5,)" />

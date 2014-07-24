@@ -1,11 +1,9 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel.Composition;
-using JSON_Intellisense._Shared.Completion;
 using Microsoft.JSON.Core.Parser;
 using Microsoft.JSON.Editor.Completion;
 using Microsoft.JSON.Editor.Completion.Def;
 using Microsoft.VisualStudio.Utilities;
-using Microsoft.Web.Editor.Intellisense;
 
 namespace JSON_Intellisense.Bower
 {

@@ -7,9 +7,8 @@ using Microsoft.JSON.Core.Parser;
 using Microsoft.JSON.Editor.Completion;
 using Microsoft.JSON.Editor.Completion.Def;
 using Microsoft.VisualStudio.Shell;
-using Microsoft.Web.Editor.Intellisense;
 
-namespace JSON_Intellisense._Shared.Completion
+namespace JSON_Intellisense
 {
     public abstract class CompletionProviderBase : IJSONCompletionListProvider
     {
