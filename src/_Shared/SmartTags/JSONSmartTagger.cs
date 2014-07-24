@@ -120,6 +120,9 @@ namespace JSON_Intellisense
                 return tags;
 
             JSONParseItem currentItem = GetContextItem(_tree, bufferPoint.Value.Position);
+            if (currentItem == null)
+                return tags;
+
             JSONParseItem parent = currentItem.Parent;
 
             IEnumerable<IJSONSmartTagProvider> providers = _smartTagProviders.GetHandlers(parent.GetType());
