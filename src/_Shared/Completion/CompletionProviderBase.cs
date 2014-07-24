@@ -40,7 +40,10 @@ namespace JSON_Intellisense._Shared.Completion
             JSONMember dependency = context.ContextItem.FindType<JSONMember>();
             JSONMember parent = dependency.Parent.FindType<JSONMember>();
 
-            if (parent == null || !parent.Name.Text.Trim('"').EndsWith("dependencies", StringComparison.OrdinalIgnoreCase))
+            if (parent == null || !parent.UnquotedNameText.EndsWith("dependencies", StringComparison.OrdinalIgnoreCase))
+                return null;
+
+            if (dependency.UnquotedNameText.Length < 2)
                 return null;
 
             return dependency;
