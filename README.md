@@ -5,7 +5,9 @@ Package Intellisense for Visual Studio
 -->
 NPM and Bower package Intellisense directly in the Visual Studio JSON editor.
 
-__Note__ This extension requires VS2013 Update 3 RC or newer.
+__Note__ This extension requires VS2013 Update 3 RC or newer.  
+
+Download this extension from the [VS Gallery](http://visualstudiogallery.msdn.microsoft.com/65748cdb-4087-497e-a394-2e3449c8e61e)  
 
 ### Intellisense  
 Live search results from both NPM and Bower show up in Intellisense:  
