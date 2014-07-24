@@ -25,3 +25,6 @@ Light theme:
 
 Dark theme:  
 ![Screenshot](https://raw.githubusercontent.com/madskristensen/JSON-Intellisense/master/art/tooltip-dark.png)
+
+Animated: 
+![Screenshot](https://raw.githubusercontent.com/madskristensen/JSON-Intellisense/master/art/tooltip-animated.gif)
