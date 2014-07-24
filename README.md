@@ -26,9 +26,9 @@ Light theme:
 Dark theme:  
 ![Screenshot](https://raw.githubusercontent.com/madskristensen/JSON-Intellisense/master/art/tooltip-dark.png)
 
-Animated: 
+Animated:   
 ![Screenshot](https://raw.githubusercontent.com/madskristensen/JSON-Intellisense/master/art/tooltip-animated.gif)
-
+  
 
 ### Smart Tags  
 Smart Tags are small helpers that offers contextual features
