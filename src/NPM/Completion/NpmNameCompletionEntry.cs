@@ -24,7 +24,7 @@ namespace JSON_Intellisense.NPM
 
         public override void Commit()
         {
-            if (base.DisplayText != "Search NPM...")
+            if (_doc == null)
             {
                 base.Commit();
             }
@@ -57,7 +57,7 @@ namespace JSON_Intellisense.NPM
                 _dte.StatusBar.Text = string.Empty;
                 _searchResults = children;
 
-                Helper.ExecuteCommand(_dte, "Edit.ListMembers");
+                Helper.ExecuteCommand(_dte, "Edit.CompleteWord");
             });
         }
 

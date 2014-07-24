@@ -1,8 +1,11 @@
 ﻿using System;
 using System.IO;
-using System.Net;
-using EnvDTE;
 using System.Linq;
+using System.Net;
+using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Media.Animation;
+using EnvDTE;
 using EnvDTE80;
 using Microsoft.CSS.Core;
 using Microsoft.JSON.Core.Parser;
@@ -81,6 +84,26 @@ namespace JSON_Intellisense
             }
 
             return null;
+        }
+
+        public static void AnimateWindowSize(this UserControl target, double oldHeight, double newHeight)
+        {
+            target.Height = oldHeight;
+            target.BeginAnimation(UserControl.HeightProperty, null);
+
+            Storyboard sb = new Storyboard();
+
+            var aniHeight = new DoubleAnimationUsingKeyFrames();
+            aniHeight.Duration = new Duration(new TimeSpan(0, 0, 0, 2));
+            aniHeight.KeyFrames.Add(new EasingDoubleKeyFrame(target.Height, KeyTime.FromTimeSpan(new TimeSpan(0, 0, 0, 1))));
+            aniHeight.KeyFrames.Add(new EasingDoubleKeyFrame(newHeight, KeyTime.FromTimeSpan(new TimeSpan(0, 0, 0, 1, 200))));
+
+            Storyboard.SetTarget(aniHeight, target);
+            Storyboard.SetTargetProperty(aniHeight, new PropertyPath(UserControl.HeightProperty));
+
+            sb.Children.Add(aniHeight);
+
+            sb.Begin();
         }
     }
 }

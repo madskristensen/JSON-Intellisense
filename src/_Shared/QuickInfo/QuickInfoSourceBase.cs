@@ -40,7 +40,7 @@ namespace JSON_Intellisense
                     return;
 
                 JSONMember dependency = item.FindType<JSONMember>();
-                if (dependency == null)
+                if (dependency == null || dependency.Name != item)
                     return;
 
                 var parent = dependency.Parent.FindType<JSONMember>();

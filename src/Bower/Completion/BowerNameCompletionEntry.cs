@@ -24,7 +24,7 @@ namespace JSON_Intellisense.Bower
 
         public override void Commit()
         {
-            if (base.DisplayText != "Search Bower...")
+            if (_doc == null)
             {
                 base.Commit();
             }

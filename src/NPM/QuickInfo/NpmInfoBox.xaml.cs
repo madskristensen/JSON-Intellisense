@@ -17,7 +17,11 @@ namespace JSON_Intellisense.NPM
             _box.lblName.Content = package.Name;
             _box.lblDesc.Content = package.Description;
             _box.lblLatest.Content = package.Version;
-            _box.lblAuthor.Content = package.Author;
+            _box.lblAuthor.Content = package.Author ?? "n/a";
+            _box.lblLicense.Content = package.License ?? "n/a";
+            _box.lblHomepage.Content = package.Homepage ?? "n/a";
+
+            _box.AnimateWindowSize(40, 108);
 
             return _box;
         }

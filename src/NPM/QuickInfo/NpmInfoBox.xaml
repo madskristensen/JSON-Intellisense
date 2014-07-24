@@ -4,15 +4,19 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:vsfx="clr-namespace:Microsoft.VisualStudio.Shell;assembly=Microsoft.VisualStudio.Shell.12.0"
-             mc:Ignorable="d" d:DesignWidth="300" Height="70">
+             mc:Ignorable="d" d:DesignWidth="300" Height="108">
     <Grid Margin="0,0,0,0" RenderTransformOrigin="0.553,1.514">
-        <Label x:Name="lblName" Content="Label" Foreground="{DynamicResource {x:Static vsfx:VsBrushes.ToolWindowTextKey}}" HorizontalAlignment="Left" Margin="20,-7,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.158,0.115" FontWeight="Bold"/>
-        <Label x:Name="lblDesc" Content="Label" Foreground="{DynamicResource {x:Static vsfx:VsBrushes.ToolWindowTextKey}}" HorizontalAlignment="Left" Margin="20,12,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.158,0.115"/>
+        <Label x:Name="lblName" Content="Label" Foreground="{DynamicResource {x:Static vsfx:VsBrushes.ToolWindowTextKey}}" HorizontalAlignment="Left" Margin="20,-5,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.158,0.115" FontWeight="Bold"/>
+        <Label x:Name="lblDesc" Content="Label" Foreground="{DynamicResource {x:Static vsfx:VsBrushes.ToolWindowTextKey}}" HorizontalAlignment="Left" Margin="20,14,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.158,0.115"/>
         <Label Content="Latest:" Foreground="{DynamicResource {x:Static vsfx:VsBrushes.ToolWindowTextKey}}" HorizontalAlignment="Left" Margin="20,35,0,0" VerticalAlignment="Top"/>
-        <Label x:Name="lblLatest" Foreground="{DynamicResource {x:Static vsfx:VsBrushes.ToolWindowTextKey}}" Content="Label" HorizontalAlignment="Left" Margin="69,35,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.158,0.115"/>
+        <Label x:Name="lblLatest" Foreground="{DynamicResource {x:Static vsfx:VsBrushes.ToolWindowTextKey}}" Content="Label" HorizontalAlignment="Left" Margin="88,35,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.158,0.115"/>
         <Image x:Name="imgLogo" Height="16" Margin="1,1,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.31,-0.517" HorizontalAlignment="Left"/>
         <Label Content="Author:" Foreground="{DynamicResource {x:Static vsfx:VsBrushes.ToolWindowTextKey}}" HorizontalAlignment="Left" Margin="20,51,0,-6" VerticalAlignment="Top"/>
-        <Label x:Name="lblAuthor" Content="Label" Foreground="{DynamicResource {x:Static vsfx:VsBrushes.ToolWindowTextKey}}" HorizontalAlignment="Left" Margin="69,51,0,-6" VerticalAlignment="Top" RenderTransformOrigin="0.158,0.115"/>
+        <Label x:Name="lblAuthor" Content="Label" Foreground="{DynamicResource {x:Static vsfx:VsBrushes.ToolWindowTextKey}}" HorizontalAlignment="Left" Margin="88,51,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.158,0.115"/>
+        <Label Content="License:" Foreground="{DynamicResource {x:Static vsfx:VsBrushes.ToolWindowTextKey}}" HorizontalAlignment="Left" Margin="20,67,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="lblLicense" Content="Label" Foreground="{DynamicResource {x:Static vsfx:VsBrushes.ToolWindowTextKey}}" HorizontalAlignment="Left" Margin="88,67,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.158,0.115"/>
+        <Label Content="Homepage:" Foreground="{DynamicResource {x:Static vsfx:VsBrushes.ToolWindowTextKey}}" HorizontalAlignment="Left" Margin="20,83,0,-1" VerticalAlignment="Top"/>
+        <Label x:Name="lblHomepage" Content="Label" Foreground="{DynamicResource {x:Static vsfx:VsBrushes.ToolWindowTextKey}}" HorizontalAlignment="Left" Margin="88,83,0,-1" VerticalAlignment="Top" RenderTransformOrigin="0.158,0.115"/>
 
     </Grid>
 </UserControl>

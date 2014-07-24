@@ -9,7 +9,7 @@ namespace JSON_Intellisense
     {
         public static string GetMemberName(this JSONDocument doc, ICompletionSession session)
         {
-            if (session == null)
+            if (session == null || doc == null)
                 return null;
 
             JSONParseItem member = doc.ItemBeforePosition(session.TextView.Caret.Position.BufferPosition.Position);
