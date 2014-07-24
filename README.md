@@ -1,4 +1,4 @@
-JSON extension for Visual Studio
+Package Intellisense for Visual Studio
 =================
 <!--
 [![Build status](https://ci.appveyor.com/api/projects/status/p4c2fevy6oyd2eoa)](https://ci.appveyor.com/project/madskristensen/json-intellisense)
