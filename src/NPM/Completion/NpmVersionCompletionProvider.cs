@@ -49,7 +49,7 @@ namespace JSON_Intellisense.NPM
             {
                 string package = dependency.Name.Text.Trim('"');
                 string url = string.Format(Constants.PackageUrl, package);
-                string result = Helper.DownloadText(_dte, url);
+                string result = Helper.DownloadText(url);
                 _version = ParseVersion(result);
 
                 if (_version != null)

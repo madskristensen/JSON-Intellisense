@@ -44,7 +44,7 @@ namespace JSON_Intellisense.Bower
             ThreadPool.QueueUserWorkItem(o =>
             {
                 string url = string.Format(Constants.SearchUrl, HttpUtility.UrlEncode(searchTerm));
-                string result = Helper.DownloadText(_dte, url);
+                string result = Helper.DownloadText(url);
                 var children = GetChildren(result);
 
                 if (children.Count() == 0)

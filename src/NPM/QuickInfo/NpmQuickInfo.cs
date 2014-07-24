@@ -15,7 +15,7 @@ namespace JSON_Intellisense.NPM
 
         public override UIElement CreateTooltip(string name, JSONParseItem item)
         {
-            NpmPackage package = GetText(name);
+            NpmPackage package = NpmPackage.FromPackageName(name);
 
             if (package == null)
                 return null;
@@ -26,7 +26,7 @@ namespace JSON_Intellisense.NPM
         private NpmPackage GetText(string packageName)
         {
             string url = string.Format(Constants.PackageUrl, HttpUtility.UrlEncode(packageName));
-            string result = Helper.DownloadText(_dte, url);
+            string result = Helper.DownloadText(url);
 
             if (string.IsNullOrEmpty(result))
                 return null;

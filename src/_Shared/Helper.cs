@@ -5,10 +5,13 @@ using System.Net;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media.Animation;
-using EnvDTE;
 using EnvDTE80;
 using Microsoft.CSS.Core;
 using Microsoft.JSON.Core.Parser;
+using Microsoft.VisualStudio.Shell.Interop;
+using Microsoft.VisualStudio.TextManager.Interop;
+using Microsoft.VisualStudio.Utilities;
+using Microsoft.Web.Editor;
 
 namespace JSON_Intellisense
 {
@@ -62,11 +65,8 @@ namespace JSON_Intellisense
             return true;
         }
 
-        public static string DownloadText(DTE2 dte, string url)
+        public static string DownloadText(string url)
         {
-            dte.StatusBar.Text = "Searching for packages...";
-            dte.StatusBar.Animate(true, vsStatusAnimation.vsStatusAnimationSync);
-
             try
             {
                 using (WebClient client = new WebClient())
@@ -74,14 +74,8 @@ namespace JSON_Intellisense
                     return client.DownloadString(url);
                 }
             }
-            catch (Exception ex)
-            {
-                dte.StatusBar.Text = "No packages could be found (" + ex.Message + ")";
-            }
-            finally
-            {
-                dte.StatusBar.Animate(false, vsStatusAnimation.vsStatusAnimationSync);
-            }
+            catch (Exception)
+            { /* Can't download. Just ignore */ }
 
             return null;
         }
@@ -104,6 +98,34 @@ namespace JSON_Intellisense
             sb.Children.Add(aniHeight);
 
             sb.Begin();
+        }
+
+        public static string GetFileName(this IPropertyOwner owner)
+        {
+            IVsTextBuffer bufferAdapter;
+
+            if (!owner.Properties.TryGetProperty(typeof(IVsTextBuffer), out bufferAdapter))
+                return null;
+
+            var persistFileFormat = bufferAdapter as IPersistFileFormat;
+            string ppzsFilename = null;
+            uint pnFormatIndex;
+            int returnCode = -1;
+
+            if (persistFileFormat != null)
+                try
+                {
+                    returnCode = persistFileFormat.GetCurFile(out ppzsFilename, out pnFormatIndex);
+                }
+                catch (NotImplementedException)
+                {
+                    return null;
+                }
+
+            if (returnCode != VSConstants.S_OK)
+                return null;
+
+            return ppzsFilename;
         }
     }
 }

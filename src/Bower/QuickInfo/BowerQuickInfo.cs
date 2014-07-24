@@ -9,7 +9,7 @@ namespace JSON_Intellisense.Bower
     internal class BowerQuickInfo : QuickInfoSourceBase
     {
         public BowerQuickInfo(ITextBuffer subjectBuffer, DTE2 dte)
-            :base (subjectBuffer, dte)
+            : base(subjectBuffer, dte)
         { }
 
         public override UIElement CreateTooltip(string name, JSONParseItem item)
@@ -25,7 +25,7 @@ namespace JSON_Intellisense.Bower
         private BowerPackage GetText(string packageName)
         {
             string url = string.Format(Constants.PackageUrl, HttpUtility.UrlEncode(packageName));
-            string result = Helper.DownloadText(_dte, url);
+            string result = Helper.DownloadText(url);
 
             if (string.IsNullOrEmpty(result))
                 return null;

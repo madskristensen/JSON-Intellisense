@@ -62,12 +62,15 @@
     </Compile>
     <Compile Include="Bower\BowerPackage.cs" />
     <Compile Include="Bower\QuickInfo\BowerQuickInfo.cs" />
+    <Compile Include="Bower\SmartTags\BowerUpdatePackage.cs" />
     <Compile Include="NPM\Constants.cs" />
     <Compile Include="NPM\NpmPackage.cs" />
     <Compile Include="NPM\QuickInfo\NpmQuickInfo.cs" />
     <Compile Include="NPM\QuickInfo\NpmInfoBox.xaml.cs">
       <DependentUpon>NpmInfoBox.xaml</DependentUpon>
     </Compile>
+    <Compile Include="NPM\SmartTags\NpmUpdatePackage.cs" />
+    <Compile Include="NPM\SmartTags\NavigateToHomepage.cs" />
     <Compile Include="_Shared\Completion\CompletionProviderBase.cs" />
     <Compile Include="_Shared\JSONExtensions.cs" />
     <Compile Include="_Shared\QuickInfo\QuickInfoController.cs" />
@@ -81,6 +84,12 @@
     <Compile Include="NPM\Completion\NpmNameCompletionEntry.cs" />
     <Compile Include="NPM\Completion\NpmVersionCompletionProvider.cs" />
     <Compile Include="NPM\Completion\NpmNameCompletionProvider.cs" />
+    <Compile Include="_Shared\SmartTags\JSONSmartTag.cs" />
+    <Compile Include="_Shared\SmartTags\JSONSmartTagActionBase.cs" />
+    <Compile Include="_Shared\SmartTags\JSONSmartTagger.cs" />
+    <Compile Include="_Shared\SmartTags\JSONSmartTagProviderBase.cs" />
+    <Compile Include="_Shared\SmartTags\JSONViewTaggerProvider.cs" />
+    <Compile Include="_Shared\SmartTags\IJSONSmartTagProvider.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="source.extension.vsixmanifest">
@@ -123,6 +132,10 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>$(DevEnvDir)\Extensions\Microsoft\Web Tools\Languages\Microsoft.JSON.Editor.dll</HintPath>
     </Reference>
+    <Reference Include="Microsoft.VisualStudio.OLE.Interop, Version=7.1.40304.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+    <Reference Include="Microsoft.VisualStudio.Shell.Interop, Version=7.1.40304.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+    <Reference Include="Microsoft.VisualStudio.Text.Logic, Version=12.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
+    <Reference Include="Microsoft.VisualStudio.TextManager.Interop, Version=7.1.40304.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
     <Reference Include="Microsoft.Web.Editor, Version=12.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>$(DevEnvDir)\CommonExtensions\Microsoft\Web\Editor\Microsoft.Web.Editor.dll</HintPath>
@@ -138,6 +151,7 @@
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.Composition" />
     <Reference Include="System.Web" />
+    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xaml" />
     <Reference Include="WindowsBase" />
   </ItemGroup>
