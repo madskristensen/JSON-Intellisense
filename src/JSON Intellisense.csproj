@@ -70,7 +70,7 @@
       <DependentUpon>NpmInfoBox.xaml</DependentUpon>
     </Compile>
     <Compile Include="NPM\SmartTags\NpmUpdatePackage.cs" />
-    <Compile Include="NPM\SmartTags\NavigateToHomepage.cs" />
+    <Compile Include="NPM\SmartTags\NpmNavigateToHomepage.cs" />
     <Compile Include="_Shared\Completion\CompletionProviderBase.cs" />
     <Compile Include="_Shared\JSONExtensions.cs" />
     <Compile Include="_Shared\QuickInfo\QuickInfoController.cs" />
