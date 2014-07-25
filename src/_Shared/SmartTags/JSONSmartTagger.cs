@@ -120,7 +120,7 @@ namespace JSON_Intellisense
                 return tags;
 
             JSONParseItem currentItem = GetContextItem(_tree, bufferPoint.Value.Position);
-            if (currentItem == null)
+            if (currentItem == null || currentItem.Parent == null)
                 return tags;
 
             JSONParseItem parent = currentItem.Parent;
