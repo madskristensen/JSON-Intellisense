@@ -10,8 +10,8 @@ using Microsoft.VisualStudio.Utilities;
 namespace JSON_Intellisense.Bower
 {
     [Export(typeof(IJSONSmartTagProvider))]
-    [Name("Bower Update Package")]
-    class UpdatePackageProvider : JSONSmartTagProviderBase
+    [Name("Bower Uninstall Package")]
+    class UninstallPackageProvider : JSONSmartTagProviderBase
     {
         public override string SupportedFileName
         {
@@ -23,32 +23,34 @@ namespace JSON_Intellisense.Bower
             string directory = Path.GetDirectoryName(buffer.GetFileName());
 
             if (item.Value != null && item.Value.Text.Trim('"').Length > 0)
-                yield return new UpdatePackageAction(item.UnquotedNameText, directory);
+                yield return new UninstallPackageAction(item, directory);
         }
     }
 
-    internal class UpdatePackageAction : JSONSmartTagActionBase
+    internal class UninstallPackageAction : JSONSmartTagActionBase
     {
-        private string _name;
+        private JSONMember _item;
         private string _directory;
 
-        public UpdatePackageAction(string name, string directory)
+        public UninstallPackageAction(JSONMember item, string directory)
         {
-            _name = name;
+            _item = item;
             _directory = directory;
             Icon = Constants.Icon;
         }
 
         public override string DisplayText
         {
-            get { return "Update package"; }
+            get { return "Uninstall package"; }
         }
 
         public override void Invoke()
         {
+            string param = InstallPackageAction.GenerateSaveParam(_item);
+
             var p = new Process
             {
-                StartInfo = new ProcessStartInfo("cmd", "/k bower update " + _name)
+                StartInfo = new ProcessStartInfo("cmd", "/k bower uninstall " + _item.UnquotedNameText + " " + param)
                 {
                     UseShellExecute = false,
                     WindowStyle = ProcessWindowStyle.Normal,

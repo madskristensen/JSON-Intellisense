@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.Composition;
 using System.Diagnostics;
 using System.IO;
@@ -10,8 +11,8 @@ using Microsoft.VisualStudio.Utilities;
 namespace JSON_Intellisense.Bower
 {
     [Export(typeof(IJSONSmartTagProvider))]
-    [Name("Bower Update Package")]
-    class UpdatePackageProvider : JSONSmartTagProviderBase
+    [Name("Bower Install Package")]
+    class InstallPackageProvider : JSONSmartTagProviderBase
     {
         public override string SupportedFileName
         {
@@ -22,33 +23,35 @@ namespace JSON_Intellisense.Bower
         {
             string directory = Path.GetDirectoryName(buffer.GetFileName());
 
-            if (item.Value != null && item.Value.Text.Trim('"').Length > 0)
-                yield return new UpdatePackageAction(item.UnquotedNameText, directory);
+            if (item.Value != null && item.Value.Text.Trim('"').Length == 0)
+                yield return new InstallPackageAction(item, directory);
         }
     }
 
-    internal class UpdatePackageAction : JSONSmartTagActionBase
+    internal class InstallPackageAction : JSONSmartTagActionBase
     {
-        private string _name;
+        private JSONMember _item;
         private string _directory;
 
-        public UpdatePackageAction(string name, string directory)
+        public InstallPackageAction(JSONMember item, string directory)
         {
-            _name = name;
+            _item = item;
             _directory = directory;
             Icon = Constants.Icon;
         }
 
         public override string DisplayText
         {
-            get { return "Update package"; }
+            get { return "Install package"; }
         }
 
         public override void Invoke()
         {
+            string param = GenerateSaveParam(_item);
+
             var p = new Process
             {
-                StartInfo = new ProcessStartInfo("cmd", "/k bower update " + _name)
+                StartInfo = new ProcessStartInfo("cmd", "/k bower install " + _item.UnquotedNameText + " " + param)
                 {
                     UseShellExecute = false,
                     WindowStyle = ProcessWindowStyle.Normal,
@@ -58,6 +61,18 @@ namespace JSON_Intellisense.Bower
 
             p.Start();
             p.Dispose();
+        }
+
+        public static string GenerateSaveParam(JSONMember item)
+        {
+            JSONMember parent = item.Parent.FindType<JSONMember>();
+
+            string param = "--save";
+
+            if (parent.UnquotedNameText.Equals("devDependencies", StringComparison.OrdinalIgnoreCase))
+                param += "-dev";
+
+            return param;
         }
     }
 }

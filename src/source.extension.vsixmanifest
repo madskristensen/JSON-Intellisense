@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <PackageManifest Version="2.0.0" xmlns="http://schemas.microsoft.com/developer/vsx-schema/2011" xmlns:d="http://schemas.microsoft.com/developer/vsx-schema-design/2011">
   <Metadata>
-    <Identity Id="aaa8d5c5-24d8-4c45-9620-9f77b2aa6363" Version="0.1.1" Language="en-US" Publisher="Mads Kristensen" />
+    <Identity Id="aaa8d5c5-24d8-4c45-9620-9f77b2aa6363" Version="0.1.2" Language="en-US" Publisher="Mads Kristensen" />
     <DisplayName>Package Intellisense - beta</DisplayName>
     <Description xml:space="preserve">Search for online NPM and Bower packages directly within Intellisense</Description>
     <MoreInfo>https://github.com/madskristensen/JSON-Intellisense</MoreInfo>

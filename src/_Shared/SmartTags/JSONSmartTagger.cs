@@ -192,14 +192,10 @@ namespace JSON_Intellisense
             // If this logic gets larger, consider a better design to choose between two items.
             if (nextItem != null &&
                 prevItem != null &&
-                prevItem.AfterEnd == position)// &&
-            //prevItem.FindType<SimpleSelector>() != null)
+                prevItem.AfterEnd == position)
             {
                 nextItem = null;
             }
-
-            //if (nextItem != null && nextItem.Parent != null) nextItem = nextItem.Parent;
-            //if (prevItem != null && prevItem.Parent != null) prevItem = prevItem.Parent;
 
             return nextItem ?? prevItem;
         }
