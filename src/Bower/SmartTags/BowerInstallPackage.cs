@@ -63,7 +63,7 @@ namespace JSON_Intellisense.Bower
             p.Dispose();
         }
 
-        public static string GenerateSaveParam(JSONMember item)
+        private static string GenerateSaveParam(JSONMember item)
         {
             JSONMember parent = item.Parent.FindType<JSONMember>();
 

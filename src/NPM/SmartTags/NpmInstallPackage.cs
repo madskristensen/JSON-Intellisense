@@ -7,12 +7,12 @@ using Microsoft.VisualStudio.Language.Intellisense;
 using Microsoft.VisualStudio.Text;
 using Microsoft.VisualStudio.Utilities;
 
-namespace JSON_Intellisense.Bower
+namespace JSON_Intellisense.NPM
 {
     [Export(typeof(IJSONSmartTagProvider))]
-    [Name("Bower Uninstall Package")]
-    [Order(After = "Bower Update Package")]
-    class UninstallPackageProvider : JSONSmartTagProviderBase
+    [Name("Npm Install Package")]
+    [Order(After = "NPM Update Package")]
+    class InstallPackageProvider : JSONSmartTagProviderBase
     {
         public override string SupportedFileName
         {
@@ -24,34 +24,32 @@ namespace JSON_Intellisense.Bower
             string directory = Path.GetDirectoryName(buffer.GetFileName());
 
             if (item.Value != null && item.Value.Text.Trim('"').Length > 0)
-                yield return new UninstallPackageAction(item, directory, buffer);
+                yield return new InstallPackageAction(item, directory);
         }
     }
 
-    internal class UninstallPackageAction : JSONSmartTagActionBase
+    internal class InstallPackageAction : JSONSmartTagActionBase
     {
         private JSONMember _item;
         private string _directory;
-        private ITextBuffer _buffer;
 
-        public UninstallPackageAction(JSONMember item, string directory, ITextBuffer buffer)
+        public InstallPackageAction(JSONMember item, string directory)
         {
             _item = item;
             _directory = directory;
-            _buffer = buffer;
             Icon = Constants.Icon;
         }
 
         public override string DisplayText
         {
-            get { return "Uninstall package"; }
+            get { return "Install package"; }
         }
 
         public override void Invoke()
         {
             var p = new Process
             {
-                StartInfo = new ProcessStartInfo("cmd", "/k bower uninstall " + _item.UnquotedNameText)
+                StartInfo = new ProcessStartInfo("cmd", "/k npm install " + _item.UnquotedNameText)
                 {
                     UseShellExecute = false,
                     WindowStyle = ProcessWindowStyle.Normal,
@@ -61,16 +59,6 @@ namespace JSON_Intellisense.Bower
 
             p.Start();
             p.Dispose();
-
-            RemoveLine();
-        }
-
-        private void RemoveLine()
-        {
-            var line = _buffer.CurrentSnapshot.GetLineFromPosition(_item.Start);
-
-            Span span = new Span(line.Start.Position - 1, line.Length + 1);
-            _buffer.Delete(span);
         }
     }
 }

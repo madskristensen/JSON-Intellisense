@@ -71,6 +71,8 @@
     <Compile Include="NPM\QuickInfo\NpmInfoBox.xaml.cs">
       <DependentUpon>NpmInfoBox.xaml</DependentUpon>
     </Compile>
+    <Compile Include="NPM\SmartTags\NpmInstallPackage.cs" />
+    <Compile Include="NPM\SmartTags\NpmUninstallPackage.cs" />
     <Compile Include="NPM\SmartTags\NpmUpdatePackage.cs" />
     <Compile Include="NPM\SmartTags\NpmNavigateToHomepage.cs" />
     <Compile Include="_Shared\Completion\CompletionProviderBase.cs" />

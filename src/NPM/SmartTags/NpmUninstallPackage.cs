@@ -7,11 +7,11 @@ using Microsoft.VisualStudio.Language.Intellisense;
 using Microsoft.VisualStudio.Text;
 using Microsoft.VisualStudio.Utilities;
 
-namespace JSON_Intellisense.Bower
+namespace JSON_Intellisense.NPM
 {
     [Export(typeof(IJSONSmartTagProvider))]
-    [Name("Bower Uninstall Package")]
-    [Order(After = "Bower Update Package")]
+    [Name("Npm Uninstall Package")]
+    [Order(After = "NPM Update Package")]
     class UninstallPackageProvider : JSONSmartTagProviderBase
     {
         public override string SupportedFileName
@@ -51,7 +51,7 @@ namespace JSON_Intellisense.Bower
         {
             var p = new Process
             {
-                StartInfo = new ProcessStartInfo("cmd", "/k bower uninstall " + _item.UnquotedNameText)
+                StartInfo = new ProcessStartInfo("cmd", "/k npm uninstall " + _item.UnquotedNameText)
                 {
                     UseShellExecute = false,
                     WindowStyle = ProcessWindowStyle.Normal,
