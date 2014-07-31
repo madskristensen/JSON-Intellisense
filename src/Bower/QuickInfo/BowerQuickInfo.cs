@@ -14,41 +14,12 @@ namespace JSON_Intellisense.Bower
 
         public override UIElement CreateTooltip(string name, JSONParseItem item)
         {
-            BowerPackage package = GetText(name);
+            BowerPackage package = BowerPackage.FromPackageName(name);
 
             if (package == null)
                 return null;
 
             return BowerInfoBox.Create(package);
-        }
-
-        private BowerPackage GetText(string packageName)
-        {
-            string url = string.Format(Constants.PackageUrl, HttpUtility.UrlEncode(packageName));
-            string result = Helper.DownloadText(url);
-
-            if (string.IsNullOrEmpty(result))
-                return null;
-
-            try
-            {
-                var root = Helper.ParseJSON(result);
-
-                return new BowerPackage()
-                {
-                    Name = packageName,
-                    Url = root.SelectItemText("url"),
-                    Hits = int.Parse(root.SelectItemText("hits"))
-                };
-            }
-            catch
-            { /* JSON result is invalid. Ignore */ }
-            finally
-            {
-                _dte.StatusBar.Text = string.Empty;
-            }
-
-            return null;
         }
     }
 }

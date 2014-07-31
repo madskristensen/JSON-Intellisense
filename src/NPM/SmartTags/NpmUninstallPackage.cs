@@ -39,7 +39,7 @@ namespace JSON_Intellisense.NPM
             _item = item;
             _directory = directory;
             _buffer = buffer;
-            Icon = Constants.Icon;
+            Icon = Resources.UninstallIcon;
         }
 
         public override string DisplayText

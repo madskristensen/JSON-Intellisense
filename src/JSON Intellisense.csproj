@@ -88,6 +88,7 @@
     <Compile Include="NPM\Completion\NpmNameCompletionEntry.cs" />
     <Compile Include="NPM\Completion\NpmVersionCompletionProvider.cs" />
     <Compile Include="NPM\Completion\NpmNameCompletionProvider.cs" />
+    <Compile Include="_Shared\Resources\Resources.cs" />
     <Compile Include="_Shared\SmartTags\JSONSmartTag.cs" />
     <Compile Include="_Shared\SmartTags\JSONSmartTagActionBase.cs" />
     <Compile Include="_Shared\SmartTags\JSONSmartTagger.cs" />
@@ -163,15 +164,19 @@
     <Resource Include="NPM\Resources\npm.png" />
   </ItemGroup>
   <ItemGroup>
+    <Resource Include="_Shared\Resources\browse.png" />
     <Content Include="_Shared\Resources\icon.png">
       <IncludeInVSIX>true</IncludeInVSIX>
     </Content>
+    <Resource Include="_Shared\Resources\uninstall.png" />
+    <Resource Include="_Shared\Resources\install.png" />
     <Content Include="_Shared\Resources\License.txt">
       <IncludeInVSIX>true</IncludeInVSIX>
     </Content>
     <Content Include="_Shared\Resources\preview.png">
       <IncludeInVSIX>true</IncludeInVSIX>
     </Content>
+    <Resource Include="_Shared\Resources\update.png" />
     <Resource Include="Bower\Resources\bower.png" />
   </ItemGroup>
   <ItemGroup>

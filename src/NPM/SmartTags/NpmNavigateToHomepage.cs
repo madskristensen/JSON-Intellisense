@@ -32,7 +32,7 @@ namespace JSON_Intellisense.NPM
         public NavigateToHomePageAction(string name)
         {
             _name = name;
-            Icon = Constants.Icon;
+            Icon = Resources.BrowseIcon;
         }
 
         public override string DisplayText

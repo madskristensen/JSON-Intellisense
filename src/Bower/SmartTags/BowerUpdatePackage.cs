@@ -36,7 +36,7 @@ namespace JSON_Intellisense.Bower
         {
             _name = name;
             _directory = directory;
-            Icon = Constants.Icon;
+            Icon = Resources.UpdateIcon;
         }
 
         public override string DisplayText

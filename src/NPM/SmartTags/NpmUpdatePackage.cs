@@ -21,6 +21,9 @@ namespace JSON_Intellisense.NPM
         public override IEnumerable<ISmartTagAction> GetSmartTagActions(JSONMember item, ITextBuffer buffer)
         {
             string directory = Path.GetDirectoryName(buffer.GetFileName());
+            string node_module = Path.Combine(directory, "node_modules", item.UnquotedNameText);
+
+            if (item.Value != null && item.Value.Text.Trim('"').Length > 0 && Directory.Exists(node_module))
             yield return new UpdatePackageAction(item.UnquotedNameText, directory);
         }
     }
@@ -34,7 +37,7 @@ namespace JSON_Intellisense.NPM
         {
             _name = name;
             _directory = directory;
-            Icon = Constants.Icon;
+            Icon = Resources.UpdateIcon;
         }
 
         public override string DisplayText
