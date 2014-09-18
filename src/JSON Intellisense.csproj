@@ -65,6 +65,7 @@
     <Compile Include="Bower\SmartTags\BowerInstallPackage.cs" />
     <Compile Include="Bower\SmartTags\BowerUninstallPackage.cs" />
     <Compile Include="Bower\SmartTags\BowerUpdatePackage.cs" />
+    <Compile Include="Bower\SmartTags\BowerNavigateToHomepage.cs" />
     <Compile Include="NPM\Constants.cs" />
     <Compile Include="NPM\NpmPackage.cs" />
     <Compile Include="NPM\QuickInfo\NpmQuickInfo.cs" />

@@ -11,7 +11,6 @@ namespace JSON_Intellisense
 {
     abstract class JSONSmartTagProviderBase : IJSONSmartTagProvider
     {
-
         public Type ItemType
         {
             get { return typeof(JSONMember); }
@@ -35,7 +34,6 @@ namespace JSON_Intellisense
 
             if (parent == null || !parent.UnquotedNameText.EndsWith("dependencies", StringComparison.OrdinalIgnoreCase))
                 return Enumerable.Empty<ISmartTagAction>();
-
 
             return GetSmartTagActions(member, itemTrackingSpan.TextBuffer);
         }

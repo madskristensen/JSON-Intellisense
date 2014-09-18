@@ -42,7 +42,7 @@ namespace JSON_Intellisense
             if (parent == null || !parent.UnquotedNameText.EndsWith("dependencies", StringComparison.OrdinalIgnoreCase))
                 return null;
 
-            if (dependency.UnquotedNameText.Length < 2)
+            if (dependency.UnquotedNameText.Length == 0)
                 return null;
 
             return dependency;
