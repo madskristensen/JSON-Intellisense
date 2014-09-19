@@ -78,7 +78,7 @@ namespace JSON_Intellisense.Bower
         {
             string package = dependency.Name.Text.Trim('"');
 
-            var StartInfo = new ProcessStartInfo("cmd", "/c bower info " + package + " -j")
+            ProcessStartInfo start = new ProcessStartInfo("cmd", "/c bower info " + package + " -j")
             {
                 UseShellExecute = false,
                 CreateNoWindow = true,
@@ -86,7 +86,7 @@ namespace JSON_Intellisense.Bower
                 RedirectStandardOutput = true,
             };
 
-            using (Process p = Process.Start(StartInfo))
+            using (Process p = Process.Start(start))
             {
                 p.EnableRaisingEvents = true;
                 p.OutputDataReceived += OutputDataReceived;

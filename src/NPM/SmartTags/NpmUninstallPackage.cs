@@ -49,19 +49,7 @@ namespace JSON_Intellisense.NPM
 
         public override void Invoke()
         {
-            var p = new Process
-            {
-                StartInfo = new ProcessStartInfo("cmd", "/k npm uninstall " + _item.UnquotedNameText)
-                {
-                    UseShellExecute = false,
-                    WindowStyle = ProcessWindowStyle.Normal,
-                    WorkingDirectory = _directory
-                }
-            };
-
-            p.Start();
-            p.Dispose();
-
+            Helper.RunProcess("npm uninstall " + _item.UnquotedNameText, _directory);
             RemoveLine();
         }
 

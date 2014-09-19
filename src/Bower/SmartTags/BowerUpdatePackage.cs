@@ -46,18 +46,7 @@ namespace JSON_Intellisense.Bower
 
         public override void Invoke()
         {
-            var p = new Process
-            {
-                StartInfo = new ProcessStartInfo("cmd", "/k bower update " + _name)
-                {
-                    UseShellExecute = false,
-                    WindowStyle = ProcessWindowStyle.Normal,
-                    WorkingDirectory = _directory
-                }
-            };
-
-            p.Start();
-            p.Dispose();
+            Helper.RunProcess("bower update " + _name, _directory);
         }
     }
 }

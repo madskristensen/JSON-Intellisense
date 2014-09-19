@@ -48,19 +48,7 @@ namespace JSON_Intellisense.Bower
         public override void Invoke()
         {
             string param = GenerateSaveParam(_item);
-
-            var p = new Process
-            {
-                StartInfo = new ProcessStartInfo("cmd", "/k bower install " + _item.UnquotedNameText + " " + param)
-                {
-                    UseShellExecute = false,
-                    WindowStyle = ProcessWindowStyle.Normal,
-                    WorkingDirectory = _directory
-                }
-            };
-
-            p.Start();
-            p.Dispose();
+            Helper.RunProcess("bower install " + _item.UnquotedNameText + " " + param, _directory);
         }
 
         private static string GenerateSaveParam(JSONMember item)

@@ -48,18 +48,7 @@ namespace JSON_Intellisense.NPM
 
         public override void Invoke()
         {
-            var p = new Process
-            {
-                StartInfo = new ProcessStartInfo("cmd", "/k npm install " + _item.UnquotedNameText)
-                {
-                    UseShellExecute = false,
-                    WindowStyle = ProcessWindowStyle.Normal,
-                    WorkingDirectory = _directory
-                }
-            };
-
-            p.Start();
-            p.Dispose();
+            Helper.RunProcess("npm install " + _item.UnquotedNameText, _directory);
         }
     }
 }

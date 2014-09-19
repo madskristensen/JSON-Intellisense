@@ -47,18 +47,7 @@ namespace JSON_Intellisense.NPM
 
         public override void Invoke()
         {
-            var p = new Process
-            {
-                StartInfo = new ProcessStartInfo("cmd", "/k npm update " + _name)
-                {
-                    UseShellExecute = false,
-                    WindowStyle = ProcessWindowStyle.Normal,
-                    WorkingDirectory = _directory
-                }
-            };
-
-            p.Start();
-            p.Dispose();
+            Helper.RunProcess("npm update " + _name, _directory);
         }
     }
 }

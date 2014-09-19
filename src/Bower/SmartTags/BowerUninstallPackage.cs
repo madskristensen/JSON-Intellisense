@@ -49,19 +49,7 @@ namespace JSON_Intellisense.Bower
 
         public override void Invoke()
         {
-            var p = new Process
-            {
-                StartInfo = new ProcessStartInfo("cmd", "/k bower uninstall " + _item.UnquotedNameText)
-                {
-                    UseShellExecute = false,
-                    WindowStyle = ProcessWindowStyle.Normal,
-                    WorkingDirectory = _directory
-                }
-            };
-
-            p.Start();
-            p.Dispose();
-
+            Helper.RunProcess("bower uninstall " + _item.UnquotedNameText, _directory);
             RemoveLine();
         }
 

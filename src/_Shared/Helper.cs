@@ -1,13 +1,16 @@
 ﻿using System;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Net;
+using System.Threading;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media.Animation;
 using EnvDTE80;
 using Microsoft.CSS.Core;
 using Microsoft.JSON.Core.Parser;
+using Microsoft.VisualStudio.Shell;
 using Microsoft.VisualStudio.Shell.Interop;
 using Microsoft.VisualStudio.TextManager.Interop;
 using Microsoft.VisualStudio.Utilities;
@@ -17,6 +20,8 @@ namespace JSON_Intellisense
 {
     static class Helper
     {
+        public static DTE2 _dte = Package.GetGlobalService(typeof(EnvDTE.DTE)) as DTE2;
+
         public static JSONBlockItem ParseJSON(string document)
         {
             if (string.IsNullOrEmpty(document))
@@ -126,6 +131,57 @@ namespace JSON_Intellisense
                 return null;
 
             return ppzsFilename;
+        }
+
+        public static void RunProcess(string arguments, string directory)
+        {
+            ThreadPool.QueueUserWorkItem(o =>
+            {
+                try
+                {
+                    RunProcessSync(arguments, directory);
+                }
+                catch { /* Ignore any failure */ }
+            });
+        }
+
+        private static void RunProcessSync(string arguments, string directory)
+        {
+            _dte.StatusBar.Text = "Running script in background. See output window for more details.";
+            Logger.Log(Environment.NewLine + "[" + DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss") + "]");
+
+            ProcessStartInfo start = new ProcessStartInfo("cmd", "/c " + arguments)
+            {
+                UseShellExecute = false,
+                CreateNoWindow = true,
+                ErrorDialog = false,
+                WorkingDirectory = directory,
+                RedirectStandardOutput = true,
+                RedirectStandardError = true,
+            };
+
+            using (Process p = new Process())
+            {
+                p.StartInfo = start;
+                p.EnableRaisingEvents = true;
+                p.OutputDataReceived += OutputDataReceived;
+                p.ErrorDataReceived += OutputDataReceived;
+
+                p.Start();
+                p.BeginOutputReadLine();
+                p.BeginErrorReadLine();
+                p.WaitForExit();
+            }
+
+            _dte.StatusBar.Clear();
+        }
+
+        static void OutputDataReceived(object sender, DataReceivedEventArgs e)
+        {
+            if (e != null && e.Data != null)
+            {
+                Logger.Log(e.Data);
+            }
         }
     }
 }
