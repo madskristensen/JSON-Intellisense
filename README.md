@@ -15,9 +15,12 @@ Live search results from both NPM and Bower show up in Intellisense:
 
 ![Screenshot](https://raw.githubusercontent.com/madskristensen/JSON-Intellisense/master/art/completion-name.png)
 
-It can even show the NPM package version as well:
+It can even show the package version as well:
 
 ![Screenshot](https://raw.githubusercontent.com/madskristensen/JSON-Intellisense/master/art/completion-version.png)
+
+Please notice that npm version Intellisense is much faster than Bower's. 
+This is due to Bower's slower API.
 
 
 ### Hover tooltips  
