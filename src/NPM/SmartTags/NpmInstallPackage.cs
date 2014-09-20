@@ -48,7 +48,8 @@ namespace JSON_Intellisense.NPM
         public override void Invoke()
         {
             Helper.SaveDocument();
-            Helper.RunProcess("npm install " + _item.UnquotedNameText, _directory);
+            string command = "npm install " + _item.UnquotedNameText;
+            Helper.RunProcess(command, _directory, Resources.text.statusbarInstalling);
         }
     }
 }

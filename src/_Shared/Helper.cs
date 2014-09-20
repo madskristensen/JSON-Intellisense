@@ -133,13 +133,13 @@ namespace JSON_Intellisense
             return ppzsFilename;
         }
 
-        public static void RunProcess(string arguments, string directory, Action callback = null)
+        public static void RunProcess(string arguments, string directory, string statusbar, Action callback = null)
         {
             ThreadPool.QueueUserWorkItem(o =>
             {
                 try
                 {
-                    RunProcessSync(arguments, directory);
+                    RunProcessSync(arguments, directory, statusbar);
 
                     if (callback != null)
                         callback();
@@ -156,9 +156,9 @@ namespace JSON_Intellisense
                 doc.Save();
         }
 
-        private static void RunProcessSync(string arguments, string directory)
+        private static void RunProcessSync(string arguments, string directory, string statusbar)
         {
-            DTE.StatusBar.Text = "Running script in background. See output window for more details.";
+            DTE.StatusBar.Text = statusbar;
 
             ProcessStartInfo start = new ProcessStartInfo("cmd", "/c " + arguments)
             {

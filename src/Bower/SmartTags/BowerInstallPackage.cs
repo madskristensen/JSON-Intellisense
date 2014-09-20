@@ -50,7 +50,8 @@ namespace JSON_Intellisense.Bower
         {
             Helper.SaveDocument();
             string param = GenerateSaveParam(_item);
-            Helper.RunProcess("bower install " + _item.UnquotedNameText + " " + param, _directory);
+            string command = "bower install " + _item.UnquotedNameText + " " + param;
+            Helper.RunProcess(command, _directory, Resources.text.statusbarInstalling);
         }
 
         private static string GenerateSaveParam(JSONMember item)

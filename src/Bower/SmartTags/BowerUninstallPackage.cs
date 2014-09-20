@@ -48,7 +48,8 @@ namespace JSON_Intellisense.Bower
 
         public override void Invoke()
         {
-            Helper.RunProcess("bower uninstall " + _item.UnquotedNameText, _directory, Helper.SaveDocument);
+            string command = "bower uninstall " + _item.UnquotedNameText;
+            Helper.RunProcess(command, _directory, Resources.text.statusbarUninstalling, Helper.SaveDocument);
 
             Helper.DTE.UndoContext.Open(Resources.text.SmartTagUninstallPackage);
             _item.DeletePackageMember(_buffer);

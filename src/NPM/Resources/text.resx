@@ -159,7 +159,13 @@
   <data name="SmartTagUpdatePackage" xml:space="preserve">
     <value>Update package</value>
   </data>
-  <data name="String1" xml:space="preserve">
-    <value />
+  <data name="statusbarInstalling" xml:space="preserve">
+    <value>Installing package...</value>
+  </data>
+  <data name="statusbarUninstalling" xml:space="preserve">
+    <value>Uninstalling pacakge...</value>
+  </data>
+  <data name="statusbarUpdating" xml:space="preserve">
+    <value>Updating package...</value>
   </data>
 </root>

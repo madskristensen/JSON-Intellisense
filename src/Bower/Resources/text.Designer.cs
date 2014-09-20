@@ -176,5 +176,32 @@ namespace JSON_Intellisense.Bower.Resources {
                 return ResourceManager.GetString("SmartTagUpdatePackage", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Installing package....
+        /// </summary>
+        internal static string statusbarInstalling {
+            get {
+                return ResourceManager.GetString("statusbarInstalling", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Uninstalling pacakge....
+        /// </summary>
+        internal static string statusbarUninstalling {
+            get {
+                return ResourceManager.GetString("statusbarUninstalling", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Updating package....
+        /// </summary>
+        internal static string statusbarUpdating {
+            get {
+                return ResourceManager.GetString("statusbarUpdating", resourceCulture);
+            }
+        }
     }
 }

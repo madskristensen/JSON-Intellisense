@@ -47,7 +47,8 @@ namespace JSON_Intellisense.Bower
         public override void Invoke()
         {
             Helper.SaveDocument();
-            Helper.RunProcess("bower update " + _name, _directory);
+            string command = "bower update " + _name;
+            Helper.RunProcess(command, _directory, Resources.text.statusbarUpdating);
         }
     }
 }

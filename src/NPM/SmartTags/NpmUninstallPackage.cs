@@ -48,7 +48,8 @@ namespace JSON_Intellisense.NPM
 
         public override void Invoke()
         {
-            Helper.RunProcess("npm uninstall " + _item.UnquotedNameText, _directory, Helper.SaveDocument);
+            string command = "npm uninstall " + _item.UnquotedNameText;
+            Helper.RunProcess(command, _directory, Resources.text.statusbarUninstalling, Helper.SaveDocument);
 
             Helper.DTE.UndoContext.Open(Resources.text.SmartTagUninstallPackage);
             _item.DeletePackageMember(_buffer);

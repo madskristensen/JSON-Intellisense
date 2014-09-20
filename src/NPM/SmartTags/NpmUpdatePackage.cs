@@ -46,7 +46,8 @@ namespace JSON_Intellisense.NPM
 
         public override void Invoke()
         {
-            Helper.RunProcess("npm update " + _name, _directory);
+            string command = "npm update " + _name;
+            Helper.RunProcess(command, _directory, Resources.text.statusbarUpdating);
         }
     }
 }

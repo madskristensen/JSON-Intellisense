@@ -4,7 +4,7 @@ using System.Windows.Media.Imaging;
 
 namespace JSON_Intellisense.NPM
 {
-    public static class Constants
+    static class Constants
     {
         public const string FileName = "package.json";
         public const string SearchUrl = "https://typeahead.npmjs.com/search?q={0}";
