@@ -1,8 +1,5 @@
 ﻿using System;
-using System.ComponentModel.Composition;
 using EnvDTE;
-using EnvDTE80;
-using Microsoft.VisualStudio.Shell;
 
 namespace JSON_Intellisense
 {
@@ -11,16 +8,11 @@ namespace JSON_Intellisense
         private static OutputWindowPane pane;
         private static object _syncRoot = new object();
 
-        [Import]
-        private static SVsServiceProvider serviceProvider { get; set; }
-
-        private static DTE2 _dte { get; set; }
-
         public static void Log(string message)
         {
             if (EnsurePane())
             {
-                pane.OutputString(message + Environment.NewLine);
+                pane.OutputString("[" + DateTime.Now.ToLongTimeString() + "] " + message + Environment.NewLine);
             }
         }
 
@@ -32,8 +24,7 @@ namespace JSON_Intellisense
                 {
                     if (pane == null)
                     {
-                        _dte = Package.GetGlobalService(typeof(DTE)) as DTE2;
-                        pane = _dte.ToolWindows.OutputWindow.OutputWindowPanes.Add("Package Intellisense");
+                        pane = Helper.DTE.ToolWindows.OutputWindow.OutputWindowPanes.Add("Package Intellisense");
                     }
                 }
             }

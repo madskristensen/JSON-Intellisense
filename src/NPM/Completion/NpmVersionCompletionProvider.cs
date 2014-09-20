@@ -28,9 +28,9 @@ namespace JSON_Intellisense.NPM
         {
             if (_version != null)
             {
-                yield return new NpmVersionCompletionEntry(_version, "The currently latest version of the package", context.Session, _dte);
-                yield return new NpmVersionCompletionEntry("~" + _version, "Matches the most recent minor version (1.2.x)", context.Session, _dte);
-                yield return new NpmVersionCompletionEntry("^" + _version, "Matches the most recent major version (1.x.x)", context.Session, _dte);
+                yield return new NpmVersionCompletionEntry(_version, "The currently latest version of the package", context.Session);
+                yield return new NpmVersionCompletionEntry("~" + _version, "Matches the most recent minor version (1.2.x)", context.Session);
+                yield return new NpmVersionCompletionEntry("^" + _version, "Matches the most recent major version (1.x.x)", context.Session);
 
                 _version = null;
             }
@@ -53,7 +53,7 @@ namespace JSON_Intellisense.NPM
                 _version = ParseVersion(result);
 
                 if (_version != null)
-                    Helper.ExecuteCommand(_dte, "Edit.ListMembers");
+                    Helper.ExecuteCommand("Edit.ListMembers");
             });
         }
 

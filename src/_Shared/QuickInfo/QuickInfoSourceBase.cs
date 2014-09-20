@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Windows;
-using EnvDTE80;
 using Microsoft.JSON.Core.Parser;
 using Microsoft.JSON.Editor;
 using Microsoft.VisualStudio.Language.Intellisense;
@@ -12,12 +11,10 @@ namespace JSON_Intellisense
     public abstract class QuickInfoSourceBase : IQuickInfoSource
     {
         public ITextBuffer _buffer;
-        public DTE2 _dte;
 
-        public QuickInfoSourceBase(ITextBuffer subjectBuffer, DTE2 dte)
+        public QuickInfoSourceBase(ITextBuffer subjectBuffer)
         {
             _buffer = subjectBuffer;
-            _dte = dte;
         }
 
         public void AugmentQuickInfoSession(IQuickInfoSession session, IList<object> qiContent, out ITrackingSpan applicableToSpan)

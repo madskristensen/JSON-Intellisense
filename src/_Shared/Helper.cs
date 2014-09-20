@@ -3,6 +3,7 @@ using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Net;
+using System.Text;
 using System.Threading;
 using System.Windows;
 using System.Windows.Controls;
@@ -20,7 +21,7 @@ namespace JSON_Intellisense
 {
     static class Helper
     {
-        public static DTE2 _dte = Package.GetGlobalService(typeof(EnvDTE.DTE)) as DTE2;
+        public static DTE2 DTE = Package.GetGlobalService(typeof(EnvDTE.DTE)) as DTE2;
 
         public static JSONBlockItem ParseJSON(string document)
         {
@@ -48,21 +49,18 @@ namespace JSON_Intellisense
             return null;
         }
 
-        public static void ExecuteCommand(DTE2 dte, string commandName)
+        public static void ExecuteCommand(string commandName)
         {
-            var command = dte.Commands.Item(commandName);
+            var command = DTE.Commands.Item(commandName);
             if (command.IsAvailable)
             {
-                dte.ExecuteCommand(command.Name);
+                DTE.ExecuteCommand(command.Name);
             }
         }
 
-        public static bool IsSupportedFile(DTE2 dte, string allowedName)
+        public static bool IsSupportedFile(string allowedName)
         {
-            if (dte == null)
-                return false;
-
-            var doc = dte.ActiveDocument;
+            var doc = DTE.ActiveDocument;
 
             if (doc == null || string.IsNullOrEmpty(doc.FullName) || Path.GetFileName(doc.FullName) != allowedName)
                 return false;
@@ -118,6 +116,7 @@ namespace JSON_Intellisense
             int returnCode = -1;
 
             if (persistFileFormat != null)
+            {
                 try
                 {
                     returnCode = persistFileFormat.GetCurFile(out ppzsFilename, out pnFormatIndex);
@@ -126,6 +125,7 @@ namespace JSON_Intellisense
                 {
                     return null;
                 }
+            }
 
             if (returnCode != VSConstants.S_OK)
                 return null;
@@ -147,8 +147,7 @@ namespace JSON_Intellisense
 
         private static void RunProcessSync(string arguments, string directory)
         {
-            _dte.StatusBar.Text = "Running script in background. See output window for more details.";
-            Logger.Log(Environment.NewLine + "[" + DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss") + "]");
+            DTE.StatusBar.Text = "Running script in background. See output window for more details.";
 
             ProcessStartInfo start = new ProcessStartInfo("cmd", "/c " + arguments)
             {
@@ -158,14 +157,16 @@ namespace JSON_Intellisense
                 WorkingDirectory = directory,
                 RedirectStandardOutput = true,
                 RedirectStandardError = true,
+                StandardOutputEncoding = Encoding.UTF8,
+                StandardErrorEncoding = Encoding.UTF8,
             };
 
             using (Process p = new Process())
             {
                 p.StartInfo = start;
                 p.EnableRaisingEvents = true;
-                p.OutputDataReceived += OutputDataReceived;
-                p.ErrorDataReceived += OutputDataReceived;
+                p.OutputDataReceived += DataReceived;
+                p.ErrorDataReceived += DataReceived;
 
                 p.Start();
                 p.BeginOutputReadLine();
@@ -173,15 +174,15 @@ namespace JSON_Intellisense
                 p.WaitForExit();
             }
 
-            _dte.StatusBar.Clear();
+            DTE.StatusBar.Clear();
         }
 
-        static void OutputDataReceived(object sender, DataReceivedEventArgs e)
+        static void DataReceived(object sender, DataReceivedEventArgs e)
         {
-            if (e != null && e.Data != null)
-            {
-                Logger.Log(e.Data);
-            }
+            if (e == null || string.IsNullOrEmpty(e.Data))
+                return;
+
+            Logger.Log(e.Data);
         }
     }
 }

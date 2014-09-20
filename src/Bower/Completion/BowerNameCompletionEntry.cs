@@ -2,7 +2,6 @@
 using System.Linq;
 using System.Threading;
 using System.Web;
-using EnvDTE80;
 using Microsoft.JSON.Core.Parser;
 using Microsoft.JSON.Editor.Completion;
 using Microsoft.VisualStudio.Language.Intellisense;
@@ -11,14 +10,12 @@ namespace JSON_Intellisense.Bower
 {
     class BowerNameCompletionEntry : JSONCompletionEntry
     {
-        private DTE2 _dte;
         private JSONDocument _doc;
         internal static IEnumerable<string> _searchResults;
 
-        public BowerNameCompletionEntry(string text, IIntellisenseSession session, DTE2 dte, JSONDocument doc)
+        public BowerNameCompletionEntry(string text, IIntellisenseSession session, JSONDocument doc)
             : base(text, "\"" + text + "\"", null, Constants.Icon, null, false, session as ICompletionSession)
         {
-            _dte = dte;
             _doc = doc;
         }
 
@@ -49,15 +46,15 @@ namespace JSON_Intellisense.Bower
 
                 if (children.Count() == 0)
                 {
-                    _dte.StatusBar.Text = "No packages found matching '" + searchTerm + "'";
+                    Helper.DTE.StatusBar.Text = "No packages found matching '" + searchTerm + "'";
                     base.Session.Dismiss();
                     return;
                 }
 
-                _dte.StatusBar.Text = string.Empty;
+                Helper.DTE.StatusBar.Text = string.Empty;
                 _searchResults = children;
 
-                Helper.ExecuteCommand(_dte, "Edit.CompleteWord");
+                Helper.ExecuteCommand("Edit.CompleteWord");
             });
         }
 

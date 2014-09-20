@@ -27,7 +27,7 @@ namespace JSON_Intellisense.Bower
             {
                 foreach (string value in BowerNameCompletionEntry._searchResults)
                 {
-                    yield return new BowerNameCompletionEntry(value, context.Session, _dte, null);
+                    yield return new BowerNameCompletionEntry(value, context.Session, null);
                 }
 
                 BowerNameCompletionEntry._searchResults = null;
@@ -37,7 +37,7 @@ namespace JSON_Intellisense.Bower
                 JSONMember dependency = GetDependency(context);
 
                 if (dependency != null)
-                    yield return new BowerNameCompletionEntry("Search Bower...", context.Session, _dte, dependency.JSONDocument);
+                    yield return new BowerNameCompletionEntry("Search Bower...", context.Session, dependency.JSONDocument);
             }
         }
     }

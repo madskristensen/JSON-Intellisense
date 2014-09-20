@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel.Composition;
 using System.Diagnostics;
+using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading;
 using Microsoft.JSON.Core.Parser;
@@ -15,7 +16,7 @@ namespace JSON_Intellisense.Bower
     class BowerVersionCompletionProvider : CompletionProviderBase
     {
         internal static string _version;
-        private static readonly Regex _regex = new Regex("\"version\": \"(.+)\"", RegexOptions.Compiled);
+        private static readonly Regex _regex = new Regex("\"?version\"?: (\"|')(.+)(\"|')", RegexOptions.Compiled);
         private static readonly EnvDTE.vsStatusAnimation _animation = EnvDTE.vsStatusAnimation.vsStatusAnimationFind;
         private static bool _isProcessing = false;
 
@@ -33,9 +34,9 @@ namespace JSON_Intellisense.Bower
         {
             if (_version != null)
             {
-                yield return new BowerVersionCompletionEntry(_version, "The currently latest version of the package", context.Session, _dte);
-                yield return new BowerVersionCompletionEntry("~" + _version, "Matches the most recent minor version (1.2.x)", context.Session, _dte);
-                yield return new BowerVersionCompletionEntry("^" + _version, "Matches the most recent major version (1.x.x)", context.Session, _dte);
+                yield return new BowerVersionCompletionEntry(_version, "The currently latest version of the package", context.Session);
+                yield return new BowerVersionCompletionEntry("~" + _version, "Matches the most recent minor version (1.2.x)", context.Session);
+                yield return new BowerVersionCompletionEntry("^" + _version, "Matches the most recent major version (1.x.x)", context.Session);
 
                 _version = null;
             }
@@ -59,17 +60,17 @@ namespace JSON_Intellisense.Bower
 
                 try
                 {
-                    _dte.StatusBar.Text = "Retrieving version number from Bower...";
-                    _dte.StatusBar.Animate(true, _animation);
+                    Helper.DTE.StatusBar.Text = "Retrieving version number from Bower...";
+                    Helper.DTE.StatusBar.Animate(true, _animation);
 
                     Execute(dependency);
                 }
                 catch
                 {
-                    _dte.StatusBar.Clear();
+                    Helper.DTE.StatusBar.Clear();
                 }
 
-                _dte.StatusBar.Animate(false, _animation);
+                Helper.DTE.StatusBar.Animate(false, _animation);
                 _isProcessing = false;
             });
         }
@@ -78,22 +79,28 @@ namespace JSON_Intellisense.Bower
         {
             string package = dependency.Name.Text.Trim('"');
 
-            ProcessStartInfo start = new ProcessStartInfo("cmd", "/c bower info " + package + " -j")
+            ProcessStartInfo start = new ProcessStartInfo("cmd", "/c bower info " + package)
             {
                 UseShellExecute = false,
                 CreateNoWindow = true,
                 ErrorDialog = false,
                 RedirectStandardOutput = true,
+                RedirectStandardError = true,
+                StandardOutputEncoding = Encoding.UTF8,
+                StandardErrorEncoding = Encoding.UTF8,
             };
 
-            using (Process p = Process.Start(start))
+            using (Process p = new Process())
             {
+                p.StartInfo = start;
                 p.EnableRaisingEvents = true;
                 p.OutputDataReceived += OutputDataReceived;
+                p.ErrorDataReceived += ErrorDataReceived;
                 p.Exited += Exited;
 
                 p.Start();
                 p.BeginOutputReadLine();
+                p.BeginErrorReadLine();
                 p.WaitForExit();
             }
         }
@@ -103,25 +110,31 @@ namespace JSON_Intellisense.Bower
             Process p = (Process)sender;
 
             if (p.ExitCode == 0)
-                _dte.StatusBar.Clear();
+                Helper.DTE.StatusBar.Clear();
             else
-                _dte.StatusBar.Text = "Could not retrive the version number";
+                Helper.DTE.StatusBar.Text = "Could not retrive the version number";
         }
 
         private void OutputDataReceived(object sender, DataReceivedEventArgs e)
         {
-            if (e == null || e.Data == null)
+            if (e == null || string.IsNullOrEmpty(e.Data))
                 return;
-
-            Process p = (Process)sender;
 
             var match = _regex.Match(e.Data);
 
             if (match.Success)
             {
-                _version = match.Groups[1].Value;
-                Helper.ExecuteCommand(_dte, "Edit.ListMembers");
+                _version = match.Groups[2].Value;
+                Helper.ExecuteCommand("Edit.ListMembers");
             }
+        }
+
+        private void ErrorDataReceived(object sender, DataReceivedEventArgs e)
+        {
+            if (e == null || string.IsNullOrEmpty(e.Data))
+                return;
+
+            Logger.Log(e.Data);
         }
     }
 }

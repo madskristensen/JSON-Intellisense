@@ -27,7 +27,7 @@ namespace JSON_Intellisense.NPM
             {
                 foreach (string value in NpmNameCompletionEntry._searchResults)
                 {
-                    yield return new NpmNameCompletionEntry(value, context.Session, _dte, null);
+                    yield return new NpmNameCompletionEntry(value, context.Session, null);
                 }
 
                 NpmNameCompletionEntry._searchResults = null;
@@ -37,7 +37,7 @@ namespace JSON_Intellisense.NPM
                 JSONMember dependency = GetDependency(context);
 
                 if (dependency != null)
-                    yield return new NpmNameCompletionEntry("Search NPM...", context.Session, _dte, dependency.JSONDocument);
+                    yield return new NpmNameCompletionEntry("Search NPM...", context.Session, dependency.JSONDocument);
             }
         }
     }
