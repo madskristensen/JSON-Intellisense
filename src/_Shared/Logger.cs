@@ -24,7 +24,7 @@ namespace JSON_Intellisense
                 {
                     if (pane == null)
                     {
-                        pane = Helper.DTE.ToolWindows.OutputWindow.OutputWindowPanes.Add("Package Intellisense");
+                        pane = Helper.DTE.ToolWindows.OutputWindow.OutputWindowPanes.Add(Globals.VsixName);
                     }
                 }
             }
