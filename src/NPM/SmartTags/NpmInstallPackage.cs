@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel.Composition;
-using System.Diagnostics;
 using System.IO;
 using Microsoft.JSON.Core.Parser;
 using Microsoft.VisualStudio.Language.Intellisense;
