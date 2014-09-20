@@ -1,10 +1,11 @@
 ﻿using System.Linq;
 using Microsoft.JSON.Core.Parser;
 using Microsoft.VisualStudio.Language.Intellisense;
+using Microsoft.VisualStudio.Text;
 
 namespace JSON_Intellisense
 {
-    public static class JSONExtensions
+    static class JSONExtensions
     {
         public static string GetMemberName(this JSONDocument doc, ICompletionSession session)
         {
@@ -49,6 +50,25 @@ namespace JSON_Intellisense
                 return SelectItem(obj, string.Join("/", paths.Skip(1)));
 
             return item;
+        }
+
+        public static void DeletePackageMember(this JSONMember item, ITextBuffer buffer)
+        {
+            if (item.NextSibling != null && item.NextSibling.Text == "}" && item.PreviousSibling != null)
+            {
+                JSONMember prev = item.PreviousSibling as JSONMember;
+
+                if (prev != null && prev.Comma != null)
+                {
+                    Span comma = new Span(prev.Comma.Start, prev.Comma.Length);
+                    buffer.Delete(comma);
+                }
+            }
+
+            var line = buffer.CurrentSnapshot.GetLineFromPosition(item.Start);
+
+            Span lineSpan = new Span(line.Start.Position - 1, line.Length + 1);
+            buffer.Delete(lineSpan);
         }
     }
 }

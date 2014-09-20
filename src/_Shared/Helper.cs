@@ -133,16 +133,27 @@ namespace JSON_Intellisense
             return ppzsFilename;
         }
 
-        public static void RunProcess(string arguments, string directory)
+        public static void RunProcess(string arguments, string directory, Action callback = null)
         {
             ThreadPool.QueueUserWorkItem(o =>
             {
                 try
                 {
                     RunProcessSync(arguments, directory);
+
+                    if (callback != null)
+                        callback();
                 }
                 catch { /* Ignore any failure */ }
             });
+        }
+
+        public static void SaveDocument()
+        {
+            var doc = DTE.ActiveDocument;
+
+            if (doc != null)
+                doc.Save();
         }
 
         private static void RunProcessSync(string arguments, string directory)

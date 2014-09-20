@@ -4,7 +4,7 @@ using System.Windows.Media.Imaging;
 
 namespace JSON_Intellisense
 {
-    public static class Globals
+    static class Globals
     {
         public static ImageSource InstallIcon = BitmapFrame.Create(new Uri("pack://application:,,,/JSON Intellisense;component/_Shared/Resources/install.png", UriKind.RelativeOrAbsolute));
         public static ImageSource UpdateIcon = BitmapFrame.Create(new Uri("pack://application:,,,/JSON Intellisense;component/_Shared/Resources/update.png", UriKind.RelativeOrAbsolute));

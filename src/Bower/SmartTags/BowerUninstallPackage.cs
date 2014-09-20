@@ -1,8 +1,10 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.Composition;
 using System.Diagnostics;
 using System.IO;
 using Microsoft.JSON.Core.Parser;
+using Microsoft.JSON.Editor;
 using Microsoft.VisualStudio.Language.Intellisense;
 using Microsoft.VisualStudio.Text;
 using Microsoft.VisualStudio.Utilities;
@@ -49,16 +51,17 @@ namespace JSON_Intellisense.Bower
 
         public override void Invoke()
         {
-            Helper.RunProcess("bower uninstall " + _item.UnquotedNameText, _directory);
+            Helper.RunProcess("bower uninstall " + _item.UnquotedNameText, _directory, Helper.SaveDocument);
             RemoveLine();
         }
 
         private void RemoveLine()
         {
-            var line = _buffer.CurrentSnapshot.GetLineFromPosition(_item.Start);
+            Helper.DTE.UndoContext.Open(Resources.text.SmartTagUninstallPackage);
 
-            Span span = new Span(line.Start.Position - 1, line.Length + 1);
-            _buffer.Delete(span);
+            _item.DeletePackageMember(_buffer);
+
+            Helper.DTE.UndoContext.Close();
         }
     }
 }

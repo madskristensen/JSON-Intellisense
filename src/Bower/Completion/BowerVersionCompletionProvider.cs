@@ -109,10 +109,17 @@ namespace JSON_Intellisense.Bower
         {
             Process p = (Process)sender;
 
-            if (p.ExitCode == 0)
-                Helper.DTE.StatusBar.Clear();
-            else
+            try
+            {
+                if (p.ExitCode == 0)
+                    Helper.DTE.StatusBar.Clear();
+                else
+                    Helper.DTE.StatusBar.Text = Resources.text.CompletionRetrievingVersionError;
+            }
+            catch
+            {
                 Helper.DTE.StatusBar.Text = Resources.text.CompletionRetrievingVersionError;
+            }
         }
 
         private void OutputDataReceived(object sender, DataReceivedEventArgs e)

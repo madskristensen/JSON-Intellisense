@@ -54,10 +54,11 @@ namespace JSON_Intellisense.NPM
 
         private void RemoveLine()
         {
-            var line = _buffer.CurrentSnapshot.GetLineFromPosition(_item.Start);
+            Helper.DTE.UndoContext.Open(Resources.text.SmartTagUninstallPackage);
 
-            Span span = new Span(line.Start.Position - 1, line.Length + 1);
-            _buffer.Delete(span);
+            _item.DeletePackageMember(_buffer);
+
+            Helper.DTE.UndoContext.Close();
         }
     }
 }

@@ -21,9 +21,11 @@ namespace JSON_Intellisense.Bower
 
         public override IEnumerable<ISmartTagAction> GetSmartTagActions(JSONMember item, ITextBuffer buffer)
         {
+            // TODO: Check if the bower package is already installed and if so, don't show this SmartTag
+
             string directory = Path.GetDirectoryName(buffer.GetFileName());
 
-            if (item.Value != null && item.Value.Text.Trim('"').Length == 0)
+            if (item.Value != null && item.Value.Text.Trim('"').Length > 0)
                 yield return new InstallPackageAction(item, directory);
         }
     }
@@ -47,6 +49,7 @@ namespace JSON_Intellisense.Bower
 
         public override void Invoke()
         {
+            Helper.SaveDocument();
             string param = GenerateSaveParam(_item);
             Helper.RunProcess("bower install " + _item.UnquotedNameText + " " + param, _directory);
         }

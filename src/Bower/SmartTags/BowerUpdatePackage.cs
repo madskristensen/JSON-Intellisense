@@ -46,6 +46,7 @@ namespace JSON_Intellisense.Bower
 
         public override void Invoke()
         {
+            Helper.SaveDocument();
             Helper.RunProcess("bower update " + _name, _directory);
         }
     }

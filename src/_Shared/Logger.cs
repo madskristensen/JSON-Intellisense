@@ -3,7 +3,7 @@ using EnvDTE;
 
 namespace JSON_Intellisense
 {
-    public class Logger
+    class Logger
     {
         private static OutputWindowPane pane;
         private static object _syncRoot = new object();
