@@ -41,7 +41,7 @@ namespace JSON_Intellisense.Bower
 
         public override string DisplayText
         {
-            get { return "Update package"; }
+            get { return Resources.text.SmartTagUpdatePackage; }
         }
 
         public override void Invoke()

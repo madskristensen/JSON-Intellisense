@@ -13,9 +13,9 @@ namespace JSON_Intellisense
     {
         public IQuickInfoSource TryCreateQuickInfoSource(ITextBuffer textBuffer)
         {
-            if (Helper.IsSupportedFile("bower.json"))
+            if (Helper.IsSupportedFile(Bower.Constants.FileName))
                 return new Bower.BowerQuickInfo(textBuffer);
-            else if (Helper.IsSupportedFile("package.json"))
+            else if (Helper.IsSupportedFile(NPM.Constants.FileName))
                 return new NPM.NpmQuickInfo(textBuffer);
 
             return null;

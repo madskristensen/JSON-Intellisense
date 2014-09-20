@@ -34,9 +34,9 @@ namespace JSON_Intellisense.Bower
         {
             if (_version != null)
             {
-                yield return new BowerVersionCompletionEntry(_version, "The currently latest version of the package", context.Session);
-                yield return new BowerVersionCompletionEntry("~" + _version, "Matches the most recent minor version (1.2.x)", context.Session);
-                yield return new BowerVersionCompletionEntry("^" + _version, "Matches the most recent major version (1.x.x)", context.Session);
+                yield return new BowerVersionCompletionEntry(_version, Resources.text.CompletionVersionLatest, context.Session);
+                yield return new BowerVersionCompletionEntry("~" + _version, Resources.text.CompletionVersionMinor, context.Session);
+                yield return new BowerVersionCompletionEntry("^" + _version, Resources.text.CompletionVersionMajor, context.Session);
 
                 _version = null;
             }
@@ -60,7 +60,7 @@ namespace JSON_Intellisense.Bower
 
                 try
                 {
-                    Helper.DTE.StatusBar.Text = "Retrieving version number from Bower...";
+                    Helper.DTE.StatusBar.Text = Resources.text.CompletionRetrievingVersion;
                     Helper.DTE.StatusBar.Animate(true, _animation);
 
                     Execute(dependency);
@@ -112,7 +112,7 @@ namespace JSON_Intellisense.Bower
             if (p.ExitCode == 0)
                 Helper.DTE.StatusBar.Clear();
             else
-                Helper.DTE.StatusBar.Text = "Could not retrive the version number";
+                Helper.DTE.StatusBar.Text = Resources.text.CompletionRetrievingVersionError;
         }
 
         private void OutputDataReceived(object sender, DataReceivedEventArgs e)

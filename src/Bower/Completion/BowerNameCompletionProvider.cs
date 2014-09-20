@@ -37,7 +37,7 @@ namespace JSON_Intellisense.Bower
                 JSONMember dependency = GetDependency(context);
 
                 if (dependency != null)
-                    yield return new BowerNameCompletionEntry("Search Bower...", context.Session, dependency.JSONDocument);
+                    yield return new BowerNameCompletionEntry(Resources.text.CompletionSearch, context.Session, dependency.JSONDocument);
             }
         }
     }

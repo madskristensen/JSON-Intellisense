@@ -44,7 +44,7 @@ namespace JSON_Intellisense.Bower
 
         public override string DisplayText
         {
-            get { return "Uninstall package"; }
+            get { return Resources.text.SmartTagUninstallPackage; }
         }
 
         public override void Invoke()

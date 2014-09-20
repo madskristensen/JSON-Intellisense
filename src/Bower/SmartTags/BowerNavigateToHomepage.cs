@@ -37,7 +37,7 @@ namespace JSON_Intellisense.Bower
 
         public override string DisplayText
         {
-            get { return "Open homepage in browser"; }
+            get { return Resources.text.SmartTagNavigateToHomepage; }
         }
 
         public override void Invoke()
@@ -52,7 +52,7 @@ namespace JSON_Intellisense.Bower
             }
             else
             {
-                MessageBox.Show("The package's doesn't specify a valid homepage", "JSON Intellisense", MessageBoxButtons.OK, MessageBoxIcon.Hand);
+                MessageBox.Show(Resources.text.SmartTagNavigateToHomepageError, Globals.VsixName, MessageBoxButtons.OK, MessageBoxIcon.Hand);
             }
         }
     }

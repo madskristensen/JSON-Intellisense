@@ -8,7 +8,7 @@
     <Grid Margin="0,0,0,0" RenderTransformOrigin="0.553,1.514">
         <Label x:Name="lblName" Content="Label" Foreground="{DynamicResource {x:Static vsfx:VsBrushes.ToolWindowTextKey}}" HorizontalAlignment="Left" Margin="20,-4,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.158,0.115" FontWeight="Bold"/>
         <Label x:Name="lblUrl" Content="Label" Foreground="{DynamicResource {x:Static vsfx:VsBrushes.ToolWindowTextKey}}" HorizontalAlignment="Left" Margin="20,12,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.158,0.115"/>
-        <Label Content="Hits:"  Foreground="{DynamicResource {x:Static vsfx:VsBrushes.ToolWindowTextKey}}" HorizontalAlignment="Left" Margin="20,34,0,-4" VerticalAlignment="Top"/>
+        <Label x:Name="descHits" Content="Hits:"  Foreground="{DynamicResource {x:Static vsfx:VsBrushes.ToolWindowTextKey}}" HorizontalAlignment="Left" Margin="20,34,0,-4" VerticalAlignment="Top"/>
         <Label x:Name="lblHits" Content="Label" Foreground="{DynamicResource {x:Static vsfx:VsBrushes.ToolWindowTextKey}}" HorizontalAlignment="Left" Margin="56,34,0,-4" VerticalAlignment="Top" RenderTransformOrigin="0.158,0.115"/>
         <Image x:Name="imgLogo" Height="16" Margin="1,1,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.31,-0.517" HorizontalAlignment="Left"/>
     </Grid>

@@ -64,6 +64,11 @@
     </Compile>
     <Compile Include="Bower\BowerPackage.cs" />
     <Compile Include="Bower\QuickInfo\BowerQuickInfo.cs" />
+    <Compile Include="Bower\Resources\text.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>text.resx</DependentUpon>
+    </Compile>
     <Compile Include="Bower\SmartTags\BowerInstallPackage.cs" />
     <Compile Include="Bower\SmartTags\BowerUninstallPackage.cs" />
     <Compile Include="Bower\SmartTags\BowerUpdatePackage.cs" />
@@ -204,6 +209,10 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Bower\Resources\text.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>text.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
     <EmbeddedResource Include="NPM\Resources\text.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>text.Designer.cs</LastGenOutput>

@@ -7,7 +7,6 @@ namespace JSON_Intellisense.Bower
         public string Name { get; set; }
         public string Url { get; set; }
         public int Hits { get; set; }
-        //public string Homepage { get; set; }
 
         public static BowerPackage FromPackageName(string name)
         {
@@ -28,8 +27,7 @@ namespace JSON_Intellisense.Bower
                     Hits = int.Parse(root.SelectItemText("hits")),
                 };
             }
-            catch
-            { /* JSON result is invalid. Ignore */ }
+            catch { /* JSON result is invalid. Ignore */ }
 
             return null;
         }

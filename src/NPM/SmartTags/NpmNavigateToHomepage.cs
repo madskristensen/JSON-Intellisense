@@ -52,7 +52,7 @@ namespace JSON_Intellisense.NPM
             }
             else
             {
-                MessageBox.Show(Resources.text.SmartTagNavigateToHomepageError, "JSON Intellisense", MessageBoxButtons.OK, MessageBoxIcon.Hand);
+                MessageBox.Show(Resources.text.SmartTagNavigateToHomepageError, Globals.VsixName, MessageBoxButtons.OK, MessageBoxIcon.Hand);
             }
         }
     }

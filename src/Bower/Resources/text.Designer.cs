@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace JSON_Intellisense.NPM.Resources {
+namespace JSON_Intellisense.Bower.Resources {
     using System;
     
     
@@ -39,7 +39,7 @@ namespace JSON_Intellisense.NPM.Resources {
         internal static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("JSON_Intellisense.NPM.Resources.text", typeof(text).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("JSON_Intellisense.Bower.Resources.text", typeof(text).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -70,7 +70,25 @@ namespace JSON_Intellisense.NPM.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Search npm....
+        ///   Looks up a localized string similar to Retrieving version number from Bower....
+        /// </summary>
+        internal static string CompletionRetrievingVersion {
+            get {
+                return ResourceManager.GetString("CompletionRetrievingVersion", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Could not retrive the version number.
+        /// </summary>
+        internal static string CompletionRetrievingVersionError {
+            get {
+                return ResourceManager.GetString("CompletionRetrievingVersionError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Search Bower....
         /// </summary>
         internal static string CompletionSearch {
             get {
@@ -106,38 +124,11 @@ namespace JSON_Intellisense.NPM.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Author.
+        ///   Looks up a localized string similar to Hits.
         /// </summary>
-        internal static string QuickInfoAuthor {
+        internal static string QuickInfoHits {
             get {
-                return ResourceManager.GetString("QuickInfoAuthor", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Homepage.
-        /// </summary>
-        internal static string QuickInfoHomepage {
-            get {
-                return ResourceManager.GetString("QuickInfoHomepage", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Latest.
-        /// </summary>
-        internal static string QuickInfoLatest {
-            get {
-                return ResourceManager.GetString("QuickInfoLatest", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to License.
-        /// </summary>
-        internal static string QuickInfoLicense {
-            get {
-                return ResourceManager.GetString("QuickInfoLicense", resourceCulture);
+                return ResourceManager.GetString("QuickInfoHits", resourceCulture);
             }
         }
         
@@ -183,15 +174,6 @@ namespace JSON_Intellisense.NPM.Resources {
         internal static string SmartTagUpdatePackage {
             get {
                 return ResourceManager.GetString("SmartTagUpdatePackage", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to .
-        /// </summary>
-        internal static string String1 {
-            get {
-                return ResourceManager.GetString("String1", resourceCulture);
             }
         }
     }
