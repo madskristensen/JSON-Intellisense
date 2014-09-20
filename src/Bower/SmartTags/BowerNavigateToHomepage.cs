@@ -32,7 +32,7 @@ namespace JSON_Intellisense.Bower
         public NavigateToHomePageAction(string name)
         {
             _name = name;
-            Icon = Resources.BrowseIcon;
+            Icon = Globals.BrowseIcon;
         }
 
         public override string DisplayText

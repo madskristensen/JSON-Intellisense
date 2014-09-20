@@ -37,7 +37,7 @@ namespace JSON_Intellisense.NPM
                 JSONMember dependency = GetDependency(context);
 
                 if (dependency != null)
-                    yield return new NpmNameCompletionEntry("Search NPM...", context.Session, dependency.JSONDocument);
+                    yield return new NpmNameCompletionEntry(Resources.text.CompletionSearch, context.Session, dependency.JSONDocument);
             }
         }
     }

@@ -46,7 +46,7 @@ namespace JSON_Intellisense.NPM
 
                 if (children.Count() == 0)
                 {
-                    Helper.DTE.StatusBar.Text = "No packages found matching '" + searchTerm + "'";
+                    Helper.DTE.StatusBar.Text = string.Format(Resources.text.CompletionNoPackageFound, searchTerm);
                     base.Session.Dismiss();
                     return;
                 }

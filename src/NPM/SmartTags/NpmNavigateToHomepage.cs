@@ -32,12 +32,12 @@ namespace JSON_Intellisense.NPM
         public NavigateToHomePageAction(string name)
         {
             _name = name;
-            Icon = Resources.BrowseIcon;
+            Icon = Globals.BrowseIcon;
         }
 
         public override string DisplayText
         {
-            get { return "Open homepage in browser"; }
+            get { return Resources.text.SmartTagNavigateToHomepage; }
         }
 
         public override void Invoke()
@@ -52,7 +52,7 @@ namespace JSON_Intellisense.NPM
             }
             else
             {
-                MessageBox.Show("The package's doesn't specify a valid homepage", "JSON Intellisense", MessageBoxButtons.OK, MessageBoxIcon.Hand);
+                MessageBox.Show(Resources.text.SmartTagNavigateToHomepageError, "JSON Intellisense", MessageBoxButtons.OK, MessageBoxIcon.Hand);
             }
         }
     }

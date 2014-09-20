@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel.Composition;
-using System.Diagnostics;
 using System.IO;
 using Microsoft.JSON.Core.Parser;
 using Microsoft.VisualStudio.Language.Intellisense;
@@ -39,12 +38,12 @@ namespace JSON_Intellisense.NPM
             _item = item;
             _directory = directory;
             _buffer = buffer;
-            Icon = Resources.UninstallIcon;
+            Icon = Globals.UninstallIcon;
         }
 
         public override string DisplayText
         {
-            get { return "Uninstall package"; }
+            get { return Resources.text.SmartTagUninstallPackage; }
         }
 
         public override void Invoke()

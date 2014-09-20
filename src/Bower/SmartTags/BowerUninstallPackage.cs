@@ -39,7 +39,7 @@ namespace JSON_Intellisense.Bower
             _item = item;
             _directory = directory;
             _buffer = buffer;
-            Icon = Resources.UninstallIcon;
+            Icon = Globals.UninstallIcon;
         }
 
         public override string DisplayText

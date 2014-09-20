@@ -28,9 +28,9 @@ namespace JSON_Intellisense.NPM
         {
             if (_version != null)
             {
-                yield return new NpmVersionCompletionEntry(_version, "The currently latest version of the package", context.Session);
-                yield return new NpmVersionCompletionEntry("~" + _version, "Matches the most recent minor version (1.2.x)", context.Session);
-                yield return new NpmVersionCompletionEntry("^" + _version, "Matches the most recent major version (1.x.x)", context.Session);
+                yield return new NpmVersionCompletionEntry(_version, Resources.text.CompletionVersionLatest, context.Session);
+                yield return new NpmVersionCompletionEntry("~" + _version, Resources.text.CompletionVersionMinor, context.Session);
+                yield return new NpmVersionCompletionEntry("^" + _version, Resources.text.CompletionVersionMajor, context.Session);
 
                 _version = null;
             }

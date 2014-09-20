@@ -74,6 +74,11 @@
     <Compile Include="NPM\QuickInfo\NpmInfoBox.xaml.cs">
       <DependentUpon>NpmInfoBox.xaml</DependentUpon>
     </Compile>
+    <Compile Include="NPM\Resources\text.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>text.resx</DependentUpon>
+    </Compile>
     <Compile Include="NPM\SmartTags\NpmInstallPackage.cs" />
     <Compile Include="NPM\SmartTags\NpmUninstallPackage.cs" />
     <Compile Include="NPM\SmartTags\NpmUpdatePackage.cs" />
@@ -92,7 +97,7 @@
     <Compile Include="NPM\Completion\NpmNameCompletionEntry.cs" />
     <Compile Include="NPM\Completion\NpmVersionCompletionProvider.cs" />
     <Compile Include="NPM\Completion\NpmNameCompletionProvider.cs" />
-    <Compile Include="_Shared\Resources\Resources.cs" />
+    <Compile Include="_Shared\Globals.cs" />
     <Compile Include="_Shared\SmartTags\JSONSmartTag.cs" />
     <Compile Include="_Shared\SmartTags\JSONSmartTagActionBase.cs" />
     <Compile Include="_Shared\SmartTags\JSONSmartTagger.cs" />
@@ -197,6 +202,12 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="NPM\Resources\text.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>text.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(VSToolsPath)\VSSDK\Microsoft.VsSDK.targets" Condition="'$(VSToolsPath)' != ''" />

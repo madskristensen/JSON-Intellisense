@@ -38,12 +38,12 @@ namespace JSON_Intellisense.NPM
         {
             _item = item;
             _directory = directory;
-            Icon = Resources.InstallIcon;
+            Icon = Globals.InstallIcon;
         }
 
         public override string DisplayText
         {
-            get { return "Install package"; }
+            get { return Resources.text.SmartTagInstallPackage; }
         }
 
         public override void Invoke()

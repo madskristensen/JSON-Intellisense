@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel.Composition;
-using System.Diagnostics;
 using System.IO;
 using Microsoft.JSON.Core.Parser;
 using Microsoft.VisualStudio.Language.Intellisense;
@@ -37,12 +36,12 @@ namespace JSON_Intellisense.NPM
         {
             _name = name;
             _directory = directory;
-            Icon = Resources.UpdateIcon;
+            Icon = Globals.UpdateIcon;
         }
 
         public override string DisplayText
         {
-            get { return "Update package"; }
+            get { return Resources.text.SmartTagUpdatePackage; }
         }
 
         public override void Invoke()
