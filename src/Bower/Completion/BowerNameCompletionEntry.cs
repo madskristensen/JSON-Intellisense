@@ -44,7 +44,7 @@ namespace JSON_Intellisense.Bower
                 string result = Helper.DownloadText(url);
                 var children = GetChildren(result);
 
-                if (children.Count() == 0)
+                if (!children.Any())
                 {
                     Helper.DTE.StatusBar.Text = string.Format(Resources.text.CompletionNoPackageFound, searchTerm);
                     base.Session.Dismiss();
