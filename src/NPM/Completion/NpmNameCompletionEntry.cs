@@ -47,7 +47,7 @@ namespace JSON_Intellisense.NPM
                 string result = Helper.DownloadText(url);
                 var children = GetChildren(result);
 
-                if (children.Count() == 0)
+                if (!children.Any())
                 {
                     _dte.StatusBar.Text = "No packages found matching '" + searchTerm + "'";
                     base.Session.Dismiss();
