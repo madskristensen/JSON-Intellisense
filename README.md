@@ -40,3 +40,16 @@ Animated:
 Smart Tags are small helpers that offers contextual features
 
 ![Screenshot](https://raw.githubusercontent.com/madskristensen/JSON-Intellisense/master/art/smart-tags.png)
+
+### Editor watermarks
+Sometimes JSON files tend to look the same, so watermarks are
+added to the upper right corner to identify what file you are working in.
+
+![Screenshot](https://raw.githubusercontent.com/madskristensen/JSON-Intellisense/master/art/watermark.png)
+
+The watermark logos are added to:
+
+* bower.json
+* package.json
+* gruntfile.js
+* gulpfile.js

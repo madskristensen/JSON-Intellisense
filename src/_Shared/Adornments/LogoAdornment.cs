@@ -25,7 +25,7 @@ namespace JSON_Intellisense
         private void CreateImage(string imageName)
         {
             _adornment = new Image();
-            _adornment.Source = BitmapFrame.Create(new Uri("pack://application:,,,/JSON Intellisense;component/_Shared/Resources/" + imageName, UriKind.RelativeOrAbsolute));
+            _adornment.Source = BitmapFrame.Create(new Uri("pack://application:,,,/JSON Intellisense;component/_Shared/Resources/Watermarks/" + imageName, UriKind.RelativeOrAbsolute));
             _adornment.ToolTip = "Click to hide";
             _adornment.Opacity = 0.5D;
 
