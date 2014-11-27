@@ -1,8 +1,8 @@
-﻿using Microsoft.VisualStudio.Text.Editor;
-using System;
+﻿using System;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media.Imaging;
+using Microsoft.VisualStudio.Text.Editor;
 
 namespace JSON_Intellisense
 {
@@ -37,8 +37,8 @@ namespace JSON_Intellisense
         private void SetAdornmentLocation(object sender, EventArgs e)
         {
             IWpfTextView view = (IWpfTextView)sender;
-            Canvas.SetLeft(_adornment, view.ViewportRight - 100);
-            Canvas.SetTop(_adornment, view.ViewportTop + 20);
+            Canvas.SetLeft(_adornment, view.ViewportRight - _adornment.Source.Width - 20);
+            Canvas.SetTop(_adornment, view.ViewportBottom - _adornment.Source.Height - 20);
         }
 
         private void Update()
