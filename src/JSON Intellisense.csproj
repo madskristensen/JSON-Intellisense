@@ -88,6 +88,8 @@
     <Compile Include="NPM\SmartTags\NpmUninstallPackage.cs" />
     <Compile Include="NPM\SmartTags\NpmUpdatePackage.cs" />
     <Compile Include="NPM\SmartTags\NpmNavigateToHomepage.cs" />
+    <Compile Include="_Shared\Adornments\LogoAdornment.cs" />
+    <Compile Include="_Shared\Adornments\LogoProvider.cs" />
     <Compile Include="_Shared\Completion\CompletionProviderBase.cs" />
     <Compile Include="_Shared\JSONExtensions.cs" />
     <Compile Include="_Shared\Logger.cs" />
@@ -159,6 +161,7 @@
     <Reference Include="Microsoft.VisualStudio.Shell.Interop.8.0, Version=8.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
     <Reference Include="Microsoft.VisualStudio.Shell.Interop.9.0, Version=9.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
     <Reference Include="Microsoft.VisualStudio.Text.Logic, Version=12.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
+    <Reference Include="Microsoft.VisualStudio.Text.UI.Wpf, Version=12.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
     <Reference Include="Microsoft.VisualStudio.TextManager.Interop, Version=7.1.40304.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
     <Reference Include="Microsoft.VisualStudio.CoreUtility, Version=12.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
     <Reference Include="Microsoft.VisualStudio.Language.Intellisense, Version=12.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
@@ -184,6 +187,9 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="_Shared\Resources\browse.png" />
+    <Resource Include="_Shared\Resources\bower.png" />
+    <Resource Include="_Shared\Resources\grunt.png" />
+    <Resource Include="_Shared\Resources\gulp.png" />
     <Content Include="_Shared\Resources\icon.png">
       <IncludeInVSIX>true</IncludeInVSIX>
     </Content>
@@ -192,6 +198,7 @@
     <Content Include="_Shared\Resources\License.txt">
       <IncludeInVSIX>true</IncludeInVSIX>
     </Content>
+    <Resource Include="_Shared\Resources\npm.png" />
     <Content Include="_Shared\Resources\preview.png">
       <IncludeInVSIX>true</IncludeInVSIX>
     </Content>
