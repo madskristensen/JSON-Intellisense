@@ -43,7 +43,7 @@ Smart Tags are small helpers that offers contextual features
 
 ### Editor watermarks
 Sometimes JSON files tend to look the same, so watermarks are
-added to the upper right corner to identify what file you are working in.
+added to the bottom right corner to identify what file you are working in.
 
 ![Screenshot](https://raw.githubusercontent.com/madskristensen/JSON-Intellisense/master/art/watermark.png)
 
