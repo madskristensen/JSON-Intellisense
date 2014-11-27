@@ -1,8 +1,8 @@
 Package Intellisense for Visual Studio
 =================
-<!--
+
 [![Build status](https://ci.appveyor.com/api/projects/status/p4c2fevy6oyd2eoa)](https://ci.appveyor.com/project/madskristensen/json-intellisense)
--->
+
 NPM and Bower package Intellisense directly in the Visual Studio JSON editor.
 
 __Note__ This extension requires VS2013 Update 3 RC or newer.  
