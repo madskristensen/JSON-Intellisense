@@ -23,13 +23,14 @@ namespace JSON_Intellisense
             view.ViewportWidthChanged += SetAdornmentLocation;
             VisibilityChanged += ToggleVisibility;
 
-            Update();
+            if (_adornmentLayer.IsEmpty)
+                _adornmentLayer.AddAdornment(AdornmentPositioningBehavior.ViewportRelative, null, null, _adornment, null);
         }
 
         private void ToggleVisibility(object sender, bool isVisible)
         {
-            _adornment.Opacity = isVisible ? 1D : 0;
-            _currentOpacity = isVisible ? _initOpacity : 0;
+            _adornment.Opacity = isVisible ? _initOpacity : 0;
+            _currentOpacity = _adornment.Opacity;
         }
 
         private void CreateImage(string imageName)
@@ -49,12 +50,6 @@ namespace JSON_Intellisense
             IWpfTextView view = (IWpfTextView)sender;
             Canvas.SetLeft(_adornment, view.ViewportRight - _adornment.Source.Width - 20);
             Canvas.SetTop(_adornment, view.ViewportBottom - _adornment.Source.Height - 20);
-        }
-
-        private void Update()
-        {
-            if (_adornmentLayer.IsEmpty)
-                _adornmentLayer.AddAdornment(AdornmentPositioningBehavior.ViewportRelative, null, null, _adornment, null);
         }
 
         public static event EventHandler<bool> VisibilityChanged;

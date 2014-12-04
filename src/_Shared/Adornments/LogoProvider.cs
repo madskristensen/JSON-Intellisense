@@ -32,7 +32,7 @@ namespace JSON_Intellisense
         [Import]
         public SVsServiceProvider serviceProvider { get; set; }
 
-        private void ManageSettings()
+        private void LoadSettings()
         {
             _hasLoaded = true;
 
@@ -56,17 +56,17 @@ namespace JSON_Intellisense
         public void TextViewCreated(IWpfTextView textView)
         {
             if (!_hasLoaded)
-                ManageSettings();
+                LoadSettings();
 
             ITextDocument document;
             if (TextDocumentFactoryService.TryGetTextDocument(textView.TextDataModel.DocumentBuffer, out document))
             {
                 string fileName = Path.GetFileName(document.FilePath).ToLowerInvariant();
 
-                if (!string.IsNullOrEmpty(fileName) && _map.ContainsKey(fileName))
-                {
-                    LogoAdornment highlighter = new LogoAdornment(textView, _map[fileName], _isVisible);
-                }
+                if (string.IsNullOrEmpty(fileName) || !_map.ContainsKey(fileName))
+                    return;
+
+                LogoAdornment highlighter = new LogoAdornment(textView, _map[fileName], _isVisible);
             }
         }
     }
