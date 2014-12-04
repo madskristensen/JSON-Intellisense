@@ -89,6 +89,7 @@
     <Compile Include="NPM\SmartTags\NpmUpdatePackage.cs" />
     <Compile Include="NPM\SmartTags\NpmNavigateToHomepage.cs" />
     <Compile Include="_Shared\Adornments\LogoAdornment.cs" />
+    <Compile Include="_Shared\Adornments\LogoLayer.cs" />
     <Compile Include="_Shared\Adornments\LogoProvider.cs" />
     <Compile Include="_Shared\Completion\CompletionProviderBase.cs" />
     <Compile Include="_Shared\JSONExtensions.cs" />

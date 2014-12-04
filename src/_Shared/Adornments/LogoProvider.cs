@@ -1,9 +1,12 @@
-﻿using Microsoft.VisualStudio.Text;
-using Microsoft.VisualStudio.Text.Editor;
-using Microsoft.VisualStudio.Utilities;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.ComponentModel.Composition;
 using System.IO;
+using Microsoft.VisualStudio.Settings;
+using Microsoft.VisualStudio.Shell;
+using Microsoft.VisualStudio.Shell.Settings;
+using Microsoft.VisualStudio.Text;
+using Microsoft.VisualStudio.Text.Editor;
+using Microsoft.VisualStudio.Utilities;
 
 namespace JSON_Intellisense
 {
@@ -13,17 +16,9 @@ namespace JSON_Intellisense
     [TextViewRole(PredefinedTextViewRoles.Document)]
     class LogoProvider : IWpfTextViewCreationListener
     {
-        public const string LayerName = "JSON Logo";
-
-        [Import]
-        public ITextDocumentFactoryService TextDocumentFactoryService { get; set; }
-
-        [Export(typeof(AdornmentLayerDefinition))]
-        [Name(LayerName)]
-        [Order(After = PredefinedAdornmentLayers.Caret)]
-        public AdornmentLayerDefinition editorAdornmentLayer = null;
-
-        private Dictionary<string, string> _map = new Dictionary<string, string>()
+        private static bool _isVisible, _hasLoaded;
+        private const string _propertyName = "ShowWatermark";
+        private static readonly Dictionary<string, string> _map = new Dictionary<string, string>()
         {
             { "bower.json", "bower.png"},
             { "package.json", "npm.png"},
@@ -31,9 +26,38 @@ namespace JSON_Intellisense
             { "gulpfile.js", "gulp.png"},
         };
 
+        [Import]
+        public ITextDocumentFactoryService TextDocumentFactoryService { get; set; }
+
+        [Import]
+        public SVsServiceProvider serviceProvider { get; set; }
+
+        private void ManageSettings()
+        {
+            _hasLoaded = true;
+
+            SettingsManager settingsManager = new ShellSettingsManager(serviceProvider);
+            SettingsStore store = settingsManager.GetReadOnlySettingsStore(SettingsScope.UserSettings);
+
+            LogoAdornment.VisibilityChanged += (sender, isVisible) =>
+            {
+                WritableSettingsStore wstore = settingsManager.GetWritableSettingsStore(SettingsScope.UserSettings);
+                _isVisible = isVisible;
+
+                if (!wstore.CollectionExists(Globals.VsixName))
+                    wstore.CreateCollection(Globals.VsixName);
+
+                wstore.SetBoolean(Globals.VsixName, _propertyName, isVisible);
+            };
+
+            _isVisible = store.GetBoolean(Globals.VsixName, _propertyName, true);
+        }
 
         public void TextViewCreated(IWpfTextView textView)
         {
+            if (!_hasLoaded)
+                ManageSettings();
+
             ITextDocument document;
             if (TextDocumentFactoryService.TryGetTextDocument(textView.TextDataModel.DocumentBuffer, out document))
             {
@@ -41,7 +65,7 @@ namespace JSON_Intellisense
 
                 if (!string.IsNullOrEmpty(fileName) && _map.ContainsKey(fileName))
                 {
-                    LogoAdornment highlighter = new LogoAdornment(textView, _map[fileName]);
+                    LogoAdornment highlighter = new LogoAdornment(textView, _map[fileName], _isVisible);
                 }
             }
         }

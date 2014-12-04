@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media.Imaging;
 using Microsoft.VisualStudio.Text.Editor;
@@ -10,28 +9,39 @@ namespace JSON_Intellisense
     {
         private IAdornmentLayer _adornmentLayer;
         private Image _adornment;
+        private const double _initOpacity = 0.4D;
+        private double _currentOpacity;
 
-        public LogoAdornment(IWpfTextView view, string imageName)
+        public LogoAdornment(IWpfTextView view, string imageName, bool isVisible)
         {
-            _adornmentLayer = view.GetAdornmentLayer(LogoProvider.LayerName);
+            _adornmentLayer = view.GetAdornmentLayer(LogoLayer.LayerName);
+            _currentOpacity = isVisible ? _initOpacity : 0;
+
             CreateImage(imageName);
 
             view.ViewportHeightChanged += SetAdornmentLocation;
             view.ViewportWidthChanged += SetAdornmentLocation;
+            VisibilityChanged += ToggleVisibility;
 
             Update();
+        }
+
+        private void ToggleVisibility(object sender, bool isVisible)
+        {
+            _adornment.Opacity = isVisible ? 1D : 0;
+            _currentOpacity = isVisible ? _initOpacity : 0;
         }
 
         private void CreateImage(string imageName)
         {
             _adornment = new Image();
             _adornment.Source = BitmapFrame.Create(new Uri("pack://application:,,,/JSON Intellisense;component/_Shared/Resources/Watermarks/" + imageName, UriKind.RelativeOrAbsolute));
-            _adornment.ToolTip = "Click to hide";
-            _adornment.Opacity = 0.5D;
+            _adornment.ToolTip = "Click to toggle visibility";
+            _adornment.Opacity = _currentOpacity;
 
             _adornment.MouseEnter += (s, e) => { _adornment.Opacity = 1D; };
-            _adornment.MouseLeave += (s, e) => { _adornment.Opacity = 0.5D; };
-            _adornment.MouseLeftButtonUp += (s, e) => { _adornment.Visibility = Visibility.Hidden; };
+            _adornment.MouseLeave += (s, e) => { _adornment.Opacity = _currentOpacity; };
+            _adornment.MouseLeftButtonUp += (s, e) => { OnVisibilityChanged(_currentOpacity == 0); };
         }
 
         private void SetAdornmentLocation(object sender, EventArgs e)
@@ -45,6 +55,14 @@ namespace JSON_Intellisense
         {
             if (_adornmentLayer.IsEmpty)
                 _adornmentLayer.AddAdornment(AdornmentPositioningBehavior.ViewportRelative, null, null, _adornment, null);
+        }
+
+        public static event EventHandler<bool> VisibilityChanged;
+
+        private static void OnVisibilityChanged(bool isVisible)
+        {
+            if (VisibilityChanged != null)
+                VisibilityChanged(null, isVisible);
         }
     }
 }
