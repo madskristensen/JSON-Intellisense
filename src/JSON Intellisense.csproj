@@ -106,6 +106,11 @@
     <Compile Include="NPM\Completion\NpmVersionCompletionProvider.cs" />
     <Compile Include="NPM\Completion\NpmNameCompletionProvider.cs" />
     <Compile Include="_Shared\Globals.cs" />
+    <Compile Include="_Shared\Resources\Resource.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resource.resx</DependentUpon>
+    </Compile>
     <Compile Include="_Shared\SmartTags\JSONSmartTag.cs" />
     <Compile Include="_Shared\SmartTags\JSONSmartTagActionBase.cs" />
     <Compile Include="_Shared\SmartTags\JSONSmartTagger.cs" />
@@ -224,6 +229,10 @@
     <EmbeddedResource Include="NPM\Resources\text.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>text.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="_Shared\Resources\Resource.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resource.Designer.cs</LastGenOutput>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup />
