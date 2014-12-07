@@ -16,8 +16,10 @@ namespace JSON_Intellisense
     [TextViewRole(PredefinedTextViewRoles.Document)]
     class LogoProvider : IWpfTextViewCreationListener
     {
-        private static bool _isVisible, _hasLoaded;
         private const string _propertyName = "ShowWatermark";
+        private const double _initOpacity = 0.4D;
+
+        private static bool _isVisible, _hasLoaded;
         private static readonly Dictionary<string, string> _map = new Dictionary<string, string>()
         {
             { "bower.json", "bower.png"},
@@ -66,7 +68,7 @@ namespace JSON_Intellisense
                 if (string.IsNullOrEmpty(fileName) || !_map.ContainsKey(fileName))
                     return;
 
-                LogoAdornment highlighter = new LogoAdornment(textView, _map[fileName], _isVisible);
+                LogoAdornment highlighter = new LogoAdornment(textView, _map[fileName], _isVisible, _initOpacity);
             }
         }
     }
