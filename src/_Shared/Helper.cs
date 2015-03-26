@@ -139,7 +139,7 @@ namespace JSON_Intellisense
             {
                 try
                 {
-                    RunProcessSync(arguments, directory, statusbar);
+                    RunProcessSync(arguments, directory, statusbar, true);
 
                     if (callback != null)
                         callback();
@@ -156,7 +156,7 @@ namespace JSON_Intellisense
                 doc.Save();
         }
 
-        private static void RunProcessSync(string arguments, string directory, string statusbar)
+        public static void RunProcessSync(string arguments, string directory, string statusbar, bool clearStatus)
         {
             DTE.StatusBar.Text = statusbar;
 
@@ -184,8 +184,9 @@ namespace JSON_Intellisense
                 p.BeginErrorReadLine();
                 p.WaitForExit();
             }
-
-            DTE.StatusBar.Clear();
+            
+            if (clearStatus)
+                DTE.StatusBar.Clear();
         }
 
         static void DataReceived(object sender, DataReceivedEventArgs e)
