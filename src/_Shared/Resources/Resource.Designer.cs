@@ -61,6 +61,15 @@ namespace JSON_Intellisense._Shared.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Click to toggle visibility.
+        /// </summary>
+        internal static string ClickToToggleVisibility {
+            get {
+                return ResourceManager.GetString("ClickToToggleVisibility", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to The exact version of the package.
         /// </summary>
         internal static string CompletionVersionLatest {
@@ -84,6 +93,42 @@ namespace JSON_Intellisense._Shared.Resources {
         internal static string CompletionVersionMinor {
             get {
                 return ResourceManager.GetString("CompletionVersionMinor", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Error restoring Bower/npm packages. See output window for details..
+        /// </summary>
+        internal static string ErrorRestoringPackages {
+            get {
+                return ResourceManager.GetString("ErrorRestoringPackages", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Package restore complete.
+        /// </summary>
+        internal static string PackageRestoreComplete {
+            get {
+                return ResourceManager.GetString("PackageRestoreComplete", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Running Bower package restore....
+        /// </summary>
+        internal static string RunningBowerRestore {
+            get {
+                return ResourceManager.GetString("RunningBowerRestore", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Running npm package restore....
+        /// </summary>
+        internal static string RunningNpmRestore {
+            get {
+                return ResourceManager.GetString("RunningNpmRestore", resourceCulture);
             }
         }
     }

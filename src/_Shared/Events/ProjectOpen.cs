@@ -5,6 +5,7 @@ using System.Linq;
 using System.Runtime.InteropServices;
 using System.Threading;
 using EnvDTE;
+using JSON_Intellisense._Shared.Resources;
 
 namespace JSON_Intellisense
 {
@@ -24,8 +25,8 @@ namespace JSON_Intellisense
                 if (string.IsNullOrEmpty(rootFolder) || !Directory.Exists(rootFolder))
                     continue;
 
-                string package = Path.Combine(rootFolder, "package.json");
-                string bower = Path.Combine(rootFolder, "bower.json");
+                string package = Path.Combine(rootFolder, NPM.Constants.FileName);
+                string bower = Path.Combine(rootFolder, Bower.Constants.FileName);
                 bool npmExist = File.Exists(package);
                 bool bowerExist = File.Exists(bower);
 
@@ -39,16 +40,16 @@ namespace JSON_Intellisense
                         Helper.DTE.StatusBar.Animate(true, EnvDTE.vsStatusAnimation.vsStatusAnimationSync);
 
                         if (options.BowerInstallOnOpen && bowerExist)
-                            Helper.RunProcessSync("bower install", rootFolder, "Running Bower package restore...", false);
+                            Helper.RunProcessSync("bower install", rootFolder, Resource.RunningBowerRestore, false);
 
                         if (options.NpmInstallOnOpen && npmExist)
-                            Helper.RunProcessSync("npm install", rootFolder, "Running npm package restore...", false);
+                            Helper.RunProcessSync("npm install", rootFolder, Resource.RunningNpmRestore, false);
 
-                        Helper.DTE.StatusBar.Text = "Package restore complete.";
+                        Helper.DTE.StatusBar.Text = Resource.PackageRestoreComplete;
                     }
                     catch (Exception)
                     {
-                        Helper.DTE.StatusBar.Text = "Error restoring Bower/npm packages. See output window for details.";
+                        Helper.DTE.StatusBar.Text = Resource.ErrorRestoringPackages;
                     }
                     finally
                     {

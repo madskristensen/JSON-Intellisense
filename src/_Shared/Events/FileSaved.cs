@@ -2,6 +2,7 @@
 using System.ComponentModel.Composition;
 using System.IO;
 using System.Threading;
+using JSON_Intellisense._Shared.Resources;
 using Microsoft.VisualStudio.Text;
 using Microsoft.VisualStudio.Text.Editor;
 using Microsoft.VisualStudio.Utilities;
@@ -57,15 +58,16 @@ namespace JSON_Intellisense
                     Helper.DTE.StatusBar.Animate(true, EnvDTE.vsStatusAnimation.vsStatusAnimationSync);
 
                     if (fileName.Equals(NPM.Constants.FileName) && options.NpmInstallOnSave)
-                        Helper.RunProcessSync("npm install", rootFolder, "Running npm package restore...", false);
+                        Helper.RunProcessSync("npm install", rootFolder, Resource.RunningNpmRestore, false);
                     else if (fileName.Equals(Bower.Constants.FileName) && options.BowerInstallOnSave)
-                        Helper.RunProcessSync("bower install", rootFolder, "Running Bower package restore...", false);
+                        Helper.RunProcessSync("bower install", rootFolder, Resource.RunningNpmRestore, false);
 
-                    Helper.DTE.StatusBar.Text = "Package restore completed.";
+                    Helper.DTE.StatusBar.Text = Resource.PackageRestoreComplete;
                 }
                 catch (Exception ex)
                 {
                     Logger.Log(ex.Message);
+                    Helper.DTE.StatusBar.Text = Resource.ErrorRestoringPackages;
                 }
                 finally
                 {

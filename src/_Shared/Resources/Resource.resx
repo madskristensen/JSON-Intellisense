@@ -117,6 +117,9 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="ClickToToggleVisibility" xml:space="preserve">
+    <value>Click to toggle visibility</value>
+  </data>
   <data name="CompletionVersionLatest" xml:space="preserve">
     <value>The exact version of the package</value>
   </data>
@@ -125,5 +128,17 @@
   </data>
   <data name="CompletionVersionMinor" xml:space="preserve">
     <value>The most recent minor version</value>
+  </data>
+  <data name="ErrorRestoringPackages" xml:space="preserve">
+    <value>Error restoring Bower/npm packages. See output window for details.</value>
+  </data>
+  <data name="PackageRestoreComplete" xml:space="preserve">
+    <value>Package restore complete</value>
+  </data>
+  <data name="RunningBowerRestore" xml:space="preserve">
+    <value>Running Bower package restore...</value>
+  </data>
+  <data name="RunningNpmRestore" xml:space="preserve">
+    <value>Running npm package restore...</value>
   </data>
 </root>

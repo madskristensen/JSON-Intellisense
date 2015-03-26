@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Windows.Controls;
 using System.Windows.Media.Imaging;
+using JSON_Intellisense._Shared.Resources;
 using Microsoft.VisualStudio.Text.Editor;
 
 namespace JSON_Intellisense
@@ -38,7 +39,7 @@ namespace JSON_Intellisense
         {
             _adornment = new Image();
             _adornment.Source = BitmapFrame.Create(new Uri("pack://application:,,,/JSON Intellisense;component/_Shared/Resources/Watermarks/" + imageName, UriKind.RelativeOrAbsolute));
-            _adornment.ToolTip = "Click to toggle visibility";
+            _adornment.ToolTip = Resource.ClickToToggleVisibility;
             _adornment.Opacity = _currentOpacity;
 
             _adornment.MouseEnter += (s, e) => { _adornment.Opacity = 1D; };
