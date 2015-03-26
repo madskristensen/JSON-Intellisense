@@ -187,7 +187,7 @@ namespace JSON_Intellisense.Bower.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Uninstalling pacakge....
+        ///   Looks up a localized string similar to Uninstalling package....
         /// </summary>
         internal static string statusbarUninstalling {
             get {

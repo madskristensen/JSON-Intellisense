@@ -22,6 +22,7 @@ namespace JSON_Intellisense
     static class Helper
     {
         public static DTE2 DTE = Package.GetGlobalService(typeof(EnvDTE.DTE)) as DTE2;
+        public static bool IsSaving;
 
         public static JSONBlockItem ParseJSON(string document)
         {
@@ -150,10 +151,13 @@ namespace JSON_Intellisense
 
         public static void SaveDocument()
         {
+            IsSaving = true;
             var doc = DTE.ActiveDocument;
 
             if (doc != null)
                 doc.Save();
+
+            IsSaving = false;
         }
 
         public static void RunProcessSync(string arguments, string directory, string statusbar, bool clearStatus)

@@ -16,6 +16,7 @@ namespace JSON_Intellisense
     public sealed class JSON_IntellisensePackage : Package
     {
         public const string Version = "1.6";
+        public static Options Options;
         
         protected override void Initialize()
         {
@@ -23,6 +24,8 @@ namespace JSON_Intellisense
 
             Events2 events = (Events2)Helper.DTE.Events;
             events.SolutionEvents.Opened += SolutionEvents_Opened;
+
+            Options = (Options)GetDialogPage(typeof(Options));
 
             // Add our command handlers for menu (commands must exist in the .vsct file)
             //OleMenuCommandService mcs = GetService(typeof(IMenuCommandService)) as OleMenuCommandService;
@@ -37,12 +40,10 @@ namespace JSON_Intellisense
 
         void SolutionEvents_Opened()
         {
-            Options options = (Options)GetDialogPage(typeof(Options));
-
             try
             {
                 ProjectOpen po = new ProjectOpen();
-                po.InstallPackages(options);
+                po.InstallPackages(Options);
             }
             catch (Exception ex)
             {

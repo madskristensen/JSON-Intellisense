@@ -91,6 +91,7 @@
     <Compile Include="_Shared\Adornments\LogoLayer.cs" />
     <Compile Include="_Shared\Adornments\LogoProvider.cs" />
     <Compile Include="_Shared\Completion\CompletionProviderBase.cs" />
+    <Compile Include="_Shared\Events\FileSaved.cs" />
     <Compile Include="_Shared\Events\ProjectOpen.cs" />
     <Compile Include="_Shared\JSONExtensions.cs" />
     <Compile Include="_Shared\Logger.cs" />

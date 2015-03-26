@@ -160,7 +160,7 @@
     <value>Installing package...</value>
   </data>
   <data name="statusbarUninstalling" xml:space="preserve">
-    <value>Uninstalling pacakge...</value>
+    <value>Uninstalling package...</value>
   </data>
   <data name="statusbarUpdating" xml:space="preserve">
     <value>Updating package...</value>
