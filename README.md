@@ -62,3 +62,7 @@ open a project in Visual Studio.
 
 **Tools -> Options -> Package Intellisense** let's you modify the behavior
 of this feature.
+
+### Package restore on save
+Any time you save either package.json or bower.json the packages will be 
+restored/installed automatically in the background.
