@@ -8,6 +8,8 @@ NPM and Bower package Intellisense directly in the Visual Studio JSON editor.
 __Note__ This extension requires VS2013 Update 3 RC or newer.  
 
 Download this extension from the [VS Gallery](http://visualstudiogallery.msdn.microsoft.com/65748cdb-4087-497e-a394-2e3449c8e61e)  
+or get the [nightly build](http://vsixgallery.com/extension/aaa8d5c5-24d8-4c45-9620-9f77b2aa6363/).
+
 ## Features
 
 ### Intellisense  
@@ -53,3 +55,10 @@ The watermark logos are added to:
 * package.json
 * gruntfile.js
 * gulpfile.js
+
+### Package restore on solution open
+Make sure you always have both npm and Bower packages restored when you
+open a project in Visual Studio. 
+
+**Tools -> Options -> Package Intellisense** let's you modify the behavior
+of this feature.
