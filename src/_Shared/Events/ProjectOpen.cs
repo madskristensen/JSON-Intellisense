@@ -17,16 +17,17 @@ namespace JSON_Intellisense
                 return;
 
             var projects = GetProjects();
+            List<string> _dupeCache = new List<string>();
 
             foreach (Project project in projects)
             {
-                string rootFolder = GetRootFolder(project);
+                string projectFolder = GetRootFolder(project);
 
-                if (string.IsNullOrEmpty(rootFolder) || !Directory.Exists(rootFolder))
+                if (string.IsNullOrEmpty(projectFolder) || !Directory.Exists(projectFolder))
                     continue;
 
-                string package = Path.Combine(rootFolder, NPM.Constants.FileName);
-                string bower = Path.Combine(rootFolder, Bower.Constants.FileName);
+                string package = GetFileName(Path.Combine(projectFolder, NPM.Constants.FileName));
+                string bower = GetFileName(Path.Combine(projectFolder, Bower.Constants.FileName));
                 bool npmExist = File.Exists(package);
                 bool bowerExist = File.Exists(bower);
 
@@ -39,11 +40,17 @@ namespace JSON_Intellisense
                     {
                         Helper.DTE.StatusBar.Animate(true, EnvDTE.vsStatusAnimation.vsStatusAnimationSync);
 
-                        if (options.BowerInstallOnOpen && bowerExist)
-                            Helper.RunProcessSync("bower install", rootFolder, Resource.RunningBowerRestore, false);
+                        if (options.BowerInstallOnOpen && bowerExist && !_dupeCache.Contains(bower))
+                        {
+                            _dupeCache.Add(bower);
+                            Helper.RunProcessSync("bower install", Path.GetDirectoryName(bower), Resource.RunningBowerRestore, false);
+                        }
 
-                        if (options.NpmInstallOnOpen && npmExist)
-                            Helper.RunProcessSync("npm install", rootFolder, Resource.RunningNpmRestore, false);
+                        if (options.NpmInstallOnOpen && npmExist && !_dupeCache.Contains(package))
+                        {
+                            _dupeCache.Add(package);
+                            Helper.RunProcessSync("npm install", Path.GetDirectoryName(package), Resource.RunningNpmRestore, false);
+                        }
 
                         Helper.DTE.StatusBar.Text = Resource.PackageRestoreComplete;
                     }
@@ -56,6 +63,27 @@ namespace JSON_Intellisense
                         Helper.DTE.StatusBar.Animate(false, EnvDTE.vsStatusAnimation.vsStatusAnimationSync);
                     }
                 });
+            }
+        }
+
+        private static string GetFileName(string fileName)
+        {
+            try
+            {
+                if (File.Exists(fileName))
+                    return fileName;
+
+                DirectoryInfo directory = new DirectoryInfo(Path.GetDirectoryName(fileName));
+                if (directory.Parent == null)
+                    return fileName;
+
+                string parent = Path.Combine(directory.Parent.FullName, Path.GetFileName(fileName));
+                return GetFileName(parent);
+            }
+            catch (Exception ex)
+            {
+                Logger.Log(ex.Message);
+                return fileName;
             }
         }
 
