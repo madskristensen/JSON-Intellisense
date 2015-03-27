@@ -3,7 +3,7 @@
   <Metadata>
     <Identity Id="aaa8d5c5-24d8-4c45-9620-9f77b2aa6363" Version="1.7" Language="en-US" Publisher="Mads Kristensen" />
     <DisplayName>Package Intellisense</DisplayName>
-    <Description xml:space="preserve">Search for online NPM and Bower packages directly within Intellisense</Description>
+    <Description xml:space="preserve">Search for online NPM and Bower packages directly within Intellisense and do automatic package restore</Description>
     <MoreInfo>https://github.com/madskristensen/JSON-Intellisense</MoreInfo>
     <License>_Shared\Resources\License.txt</License>
     <ReleaseNotes>http://visualstudiogallery.msdn.microsoft.com/65748cdb-4087-497e-a394-2e3449c8e61e</ReleaseNotes>
