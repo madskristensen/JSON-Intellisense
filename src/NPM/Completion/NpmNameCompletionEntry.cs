@@ -1,10 +1,12 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using System.Web;
 using Microsoft.JSON.Core.Parser;
 using Microsoft.JSON.Editor.Completion;
 using Microsoft.VisualStudio.Language.Intellisense;
+using Newtonsoft.Json.Linq;
 
 namespace JSON_Intellisense.NPM
 {
@@ -60,15 +62,17 @@ namespace JSON_Intellisense.NPM
 
         private static IEnumerable<string> GetChildren(string result)
         {
-            var arr = Helper.ParseJSON(result) as JSONArray;
-
-            if (arr == null)
-                yield break;
-
-            foreach (JSONBlockItemChild child in arr.BlockItemChildren)
+            try
             {
-                var foo = child.Children.First() as JSONObject;
-                yield return foo.SelectItemText("value");
+                var root = JObject.Parse(result);
+                var array = (JArray)root["sections"]["packages"];
+
+                return array.Select(a => a["value"].ToString());
+            }
+            catch (Exception ex)
+            {
+                Logger.Log(ex.Message);
+                return Enumerable.Empty<string>();
             }
         }
     }

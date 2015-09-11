@@ -17,7 +17,7 @@ namespace JSON_Intellisense
     {
         public const string Version = "1.6";
         public static Options Options;
-        
+
         protected override void Initialize()
         {
             base.Initialize();
