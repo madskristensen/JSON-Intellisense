@@ -12,3 +12,13 @@ build_script:
 
 after_build:
   - ps: Vsix-PushArtifacts | Vsix-PublishToGallery
+
+before_deploy:
+  - ps: Vsix-CreateChocolatyPackage -packageId packageintellisense
+
+deploy:
+  - provider: Environment
+    name: Chocolatey
+    on:
+      branch: master
+      appveyor_repo_commit_message_extended: /\[release\]/
