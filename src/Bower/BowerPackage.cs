@@ -12,7 +12,14 @@ namespace JSON_Intellisense.Bower
         {
             try
             {
-                string url = string.Format(Constants.PackageUrl, HttpUtility.UrlEncode(name));
+                Options options = JSON_IntellisensePackage.Options;
+                string packageUrl = Constants.PackageUrl;
+    
+                if (!string.IsNullOrEmpty(options.BowerCustomFeedUrl)) {
+                    packageUrl = options.BowerCustomFeedUrl;
+                }
+                
+                string url = string.Format(packageUrl, HttpUtility.UrlEncode(name));
                 string result = Helper.DownloadText(url);
 
                 if (string.IsNullOrEmpty(result))
