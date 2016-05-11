@@ -12,6 +12,7 @@ namespace JSON_Intellisense
             BowerInstallOnSave = true;
             NpmInstallOnSave = true;
             NpmCustomFeedUrl = string.Empty;
+            BowerCustomFeedUrl = string.Empty;
         }
 
         [Category("Project open")]
