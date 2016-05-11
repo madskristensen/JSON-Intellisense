@@ -17,7 +17,14 @@ namespace JSON_Intellisense.NPM
         {
             try
             {
-                string url = string.Format(Constants.PackageUrl, HttpUtility.UrlEncode(name));
+                Options options = JSON_IntellisensePackage.Options;
+                string packageUrl = Constants.PackageUrl;
+    
+                if (!string.IsNullOrEmpty(options.NpmCustomFeedUrl)) {
+                    packageUrl = options.NpmCustomFeedUrl;
+                }
+                
+                string url = string.Format(packageUrl, HttpUtility.UrlEncode(name));
                 string result = Helper.DownloadText(url);
                 var root = Helper.ParseJSON(result);
 
